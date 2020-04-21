@@ -11,6 +11,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 
+
+
 class SubCategoryAdmin(admin.ModelAdmin):
     list_display=('id','name','category')
 
