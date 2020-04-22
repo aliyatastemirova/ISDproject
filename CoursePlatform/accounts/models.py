@@ -46,3 +46,20 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+def create_user_profile(sender, instance, created, **kwargs):
+    """
+    :param sender: User class (model used for authentication)
+    :param instance: new user instance
+    :param created: boolean (created a new user or not)
+    :param kwargs:
+    :return: nothing
+    """
+    if created:
+        Profile.objects.create(user=instance)
+
+
+# create a user profile for a user
+# sender is the User model used for auth
+post_save.connect(create_user_profile, sender=User)
+
