@@ -39,7 +39,7 @@ class Profile(models.Model):
     birth_date = models.DateField(max_length=30, null=True)
     country = CountryField(max_length=50, null=True)
     email_confirmed = models.BooleanField(default=False)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    profile_pic = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     class Meta:
         verbose_name_plural = "Profiles"
