@@ -1,12 +1,19 @@
-<!DOCTYPE html>
+{% load crispy_forms_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>
-{{ user.username }}
-</h1>
+<div class="content-section">
+      <div>
+        <img src="{{ user.profile.image.url }}" alt="Profile picture" width="300" height="300">
+        <div>
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+    </div>
 </body>
 </html>

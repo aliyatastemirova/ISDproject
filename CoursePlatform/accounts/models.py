@@ -39,27 +39,12 @@ class Profile(models.Model):
     birth_date = models.DateField(max_length=30, null=True)
     country = CountryField(max_length=50, null=True)
     email_confirmed = models.BooleanField(default=False)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     class Meta:
         verbose_name_plural = "Profiles"
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
 
-
-def create_user_profile(sender, instance, created, **kwargs):
-    """
-    :param sender: User class (model used for authentication)
-    :param instance: new user instance
-    :param created: boolean (created a new user or not)
-    :param kwargs:
-    :return: nothing
-    """
-    if created:
-        Profile.objects.create(user=instance)
-
-
-# create a user profile for a user
-# sender is the User model used for auth
-post_save.connect(create_user_profile, sender=User)
 

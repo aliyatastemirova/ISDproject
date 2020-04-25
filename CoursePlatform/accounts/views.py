@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import FullUserCreationForm
 from django.contrib import messages
-from .models import Student
 
 
 class HomeView(TemplateView):
