@@ -9,7 +9,8 @@ urlpatterns = [
     path("register/", user_views.RegistrationFormView.as_view(), name="register"),
     path("profile/", user_views.AccountView.as_view(), name="account"),
     path("login/", auth_views.LoginView.as_view(template_name="accounts/login.html"), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(template_name="accounts/logout.html"), name="logout")
+    path("logout/", auth_views.LogoutView.as_view(template_name="accounts/logout.html"), name="logout"),
+    path("change_password", user_views.PasswordChangeView.as_view(), name='change_password'),
 ]
 
 if settings.DEBUG:
