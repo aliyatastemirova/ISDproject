@@ -33,13 +33,22 @@ INSTALLED_APPS = [
     'adminlte3',
      # Optional: Django admin theme (must be before django.contrib.admin)
     'adminlte3_theme',
+
+
+    #   # General use templates & template tags (should appear first)
+    # 'django_adminlte',
+    #  # Optional: Django admin theme (must be before django.contrib.admin)
+    # 'django_adminlte_theme',
+
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'course'
+    'course',
+    'embed_video'
 ]
 
 MIDDLEWARE = [

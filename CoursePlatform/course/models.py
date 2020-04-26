@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib import admin
 from django.utils.html import escape
+from embed_video.fields import EmbedVideoField
+from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
 
 
 
@@ -43,17 +46,27 @@ class Tutorial(models.Model):
         category=models.ForeignKey(Category,on_delete=models.CASCADE)
         subcategory=models.ForeignKey(SubCategory,on_delete=models.CASCADE)
 
-        type_of_tutorial = [
-        ('video/audio', 'Video/Audio'),
-        ('pdf', 'pdf'),
-        ('ebook', 'ebook'),
-         ]
-        type=models.CharField(max_length=100,choices=type_of_tutorial)
+        # type_of_tutorial = [
+        # ('video/audio', 'Video/Audio'),
+        # ('pdf', 'pdf'),
+        # ('ebook', 'ebook'),
+        #  ]
+        # type=models.CharField(max_length=100,choices=type_of_tutorial)
         no_of_content=models.PositiveIntegerField()
         created = models.DateTimeField(auto_now_add=True, null=True)
+        # created_by=models.ForeignKey(User)
+        value = [
+        (1, 'Active'),
+        (0, 'Inactive'),
+         ]
+        # status=models.PositiveSmallIntegerField(choices=value)
 
         def __str__(self):
                      return self.name
+
+        # def save_model(self, request, obj, form, change):
+        #   obj.user = request.user
+        #   super(Post, self).save_model(request, obj, form, change)
 
 
 
@@ -71,10 +84,11 @@ class TutorialTag(models.Model):
 class TutorialContent(models.Model):
       tutorial=models.ForeignKey(Tutorial,on_delete=models.CASCADE)
       name=models.CharField(max_length=255)
-      video_url=models.CharField(max_length=255,default=None)
-      file1=models.ImageField(default='',upload_to='course/uploads/%Y/%m/%d/ ')
-      file2=models.ImageField(default='',upload_to='course/uploads/%Y/%m/%d/')
-      file3=models.ImageField(default='',upload_to='course/uploads/%Y/%m/%d/')
+    #   video_url=models.CharField(max_length=255,default=None)
+      video_url=EmbedVideoField()
+      # file1=models.ImageField(default='',upload_to='course/uploads/%Y/%m/%d/ ')
+      # file2=models.ImageField(default='',upload_to='course/uploads/%Y/%m/%d/')
+      # file3=models.ImageField(default='',upload_to='course/uploads/%Y/%m/%d/')
       sort_order=models.PositiveSmallIntegerField()
       objective=models.TextField()
       description=models.TextField()
@@ -86,6 +100,11 @@ class TutorialContent(models.Model):
 
       def __str__(self):
                      return self.name
+
+      def video(self):
+                    return mark_safe('<iframe src="%s" />' % (self.video_url))
+                    admin_thumbnail.short_description = 'Thumbnail'
+                    admin_thumbnail.allow_tags = True
 
       
 
