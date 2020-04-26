@@ -29,18 +29,14 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+
        # General use templates & template tags (should appear first)
     'adminlte3',
      # Optional: Django admin theme (must be before django.contrib.admin)
-    'adminlte3_theme',
-
-
-    #   # General use templates & template tags (should appear first)
-    # 'django_adminlte',
-    #  # Optional: Django admin theme (must be before django.contrib.admin)
-    # 'django_adminlte_theme',
-
-
+    'adminlte3_theme'
+    'accounts.apps.AccountsConfig',
+    'crispy_forms',
+    'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +46,10 @@ INSTALLED_APPS = [
     'course',
     'embed_video'
 ]
+
+# Custom user authentication
+
+AUTH_USER_MODEL = 'accounts.Student'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -135,3 +135,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
