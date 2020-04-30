@@ -1,6 +1,6 @@
 from django.contrib import admin
 from embed_video.admin import AdminVideoMixin
-from .models import Category,SubCategory,Tutorial,TutorialContent,TutorialTag
+from .models import Category,SubCategory,Course,CourseContent,CourseTag
 
 # Register your models here.
 
@@ -43,33 +43,39 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 class TagInline(admin.TabularInline):
     fields=['name','slug']
-    model = TutorialTag
+    model = CourseTag
     extra = 2
 
+class ContentInline(admin.StackedInline):
+    fields=['course','name','video_url','objective','description','payment_confirmation','sort_order']
+    model = CourseContent
+    extra = 1
 
-class TutorialAdmin(admin.ModelAdmin):
-    list_display=('id','category','subcategory','name','no_of_content')
+
+class CourseAdmin(admin.ModelAdmin):
+    list_display=('id','category','subcategory','name','no_of_content','image_display')
     list_display_links=('id','category','subcategory','name')
     fieldsets = [
-        ('Basic Details',{'fields': ['category','subcategory','name','no_of_content','slug']}),
+        ('Basic Details',{'fields': ['category','subcategory','name','no_of_content','slug','price','thumbnail']}),
         ('Information', {'fields': ['what_student_will_learn','description','prerequisite','who_this_course_is_for'], 'classes': ['collapse']}),
     ]
-    inlines = [TagInline]
+    inlines = [TagInline,ContentInline]
 
 
 
-class TutorialContentAdmin(AdminVideoMixin,admin.ModelAdmin):
-   list_display=('id','tutorial','name','payment_conformation')
-   list_display_links=('id','tutorial','name')
-   fields=['tutorial','name','video_url','objective','description','payment_conformation','sort_order']
+
+class CourseContentAdmin(AdminVideoMixin,admin.ModelAdmin):
+   list_display=('id','course','name')
+   list_display_links=('id','name')
+   fields=['course','name','video_url','objective','description','payment_confirmation','sort_order']
    
 
 
 
 admin.site.register(Category,CategoryAdmin)
-admin.site.register(SubCategory,SubCategoryAdmin)
-admin.site.register(Tutorial,TutorialAdmin)
-admin.site.register(TutorialContent,TutorialContentAdmin)
+# admin.site.register(SubCategory,SubCategoryAdmin)
+admin.site.register(Course,CourseAdmin)
+admin.site.register(CourseContent,CourseContentAdmin)
 
 
 
