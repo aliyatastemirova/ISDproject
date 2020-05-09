@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django_countries.fields import CountryField
-from .models import Student, Profile
+from .models import User, Profile
 from functools import partial
 
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
@@ -14,7 +14,7 @@ class FullUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
-        model = Student
+        model = User
         fields = ["username", "email", "password1", "password2"]
 
 
@@ -23,7 +23,7 @@ class UserUpdateForm(forms.ModelForm):
     A form for updating common fields for all types of users: email, username
     """
     class Meta:
-        model = Student
+        model = User
         fields = ["username", "email"]
 
 

@@ -1,4 +1,3 @@
-
 {% extends 'base_frontend.html'  %}
 {% load static %}
 {% load crispy_forms_tags %}
@@ -11,28 +10,27 @@
                 <div class="section_tittle text-center">
                     <h2>Login</h2>
                 </div>
-                
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                
+
                 <form class="login-form" method="post" autocomplete="off">
                     {% csrf_token %}
-                {% if form.errors %}
+                    {% if form.errors %}
                     {% for field in form %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
                     {% endfor %}
                     {% for error in form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
                     {% endfor %}
-                {% endif %}
+                    {% endif %}
 
                     {% for field in form %}
                     {{ field.errors }}
@@ -43,12 +41,11 @@
                         {% if field.help_text %}
                         <p class="help">{{ field.help_text|safe }}</p>
                         {% endif %}
-                        
-                        
+
+
                     </label>
                     {% endfor %}
 
-                   
 
                     <label>
                         <span></span>
@@ -60,8 +57,8 @@
                     </label>
                     <label>
                         <span></span>
-                        <button type="submit" class="btn_1" >Login</button>
-                        
+                        <button type="submit" class="btn_1">Login</button>
+
                     </label>
                     <label>
                         <span></span>
@@ -81,7 +78,7 @@
             </div>
         </div>
     </div>
-    
+
 </section>
 
 {% endblock %}

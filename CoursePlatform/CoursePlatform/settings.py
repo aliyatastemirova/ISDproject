@@ -1,6 +1,6 @@
-
 import os
 import environ
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -29,8 +29,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-
-       # General use templates & template tags (should appear first)
+    # General use templates & template tags (should appear first)
     'adminlte3',
      # Optional: Django admin theme (must be before django.contrib.admin)
     'adminlte3_theme',
@@ -49,7 +48,7 @@ INSTALLED_APPS = [
 
 # Custom user authentication
 
-AUTH_USER_MODEL = 'accounts.Student'
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -88,7 +87,7 @@ WSGI_APPLICATION = 'CoursePlatform.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-         'HOST':  env('DB_HOST'),
+        'HOST':  env('DB_HOST'),
         'PORT': env('DB_PORT'),
         'NAME':  env('DB_DATABASE'),
         'USER': env('DB_USERNAME'),

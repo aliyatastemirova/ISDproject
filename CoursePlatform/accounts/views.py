@@ -8,21 +8,8 @@ from .forms import FullUserCreationForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+from django.contrib.auth.models import Group
+from .decorators import unauthenticated
 
 
 class HomeView(TemplateView):
@@ -32,7 +19,7 @@ class HomeView(TemplateView):
     template_name = "accounts/homepage.html"
 
 
-
+@method_decorator(unauthenticated, name='dispatch')
 class RegistrationFormView(View):
     """
     Registration form for new users.
@@ -48,7 +35,9 @@ class RegistrationFormView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.get(name='Students')
+            user.groups.add(group)
             messages.success(request, f"Your account has been successfully created")
             return redirect("login")
         else:
@@ -58,13 +47,13 @@ class RegistrationFormView(View):
 
 
 @method_decorator(login_required, name='dispatch')
-class AccountView(TemplateView):
+class AccountUpdateView(TemplateView):
     """
-    Profile page of each user. Login is required to see this page
+    Profile update page of each user. Login is required to see this page
     """
     profile_form_class = ProfileUpdateForm
     user_form_class = UserUpdateForm
-    template_name = "accounts/profile.html"
+    template_name = "accounts/profileupdate.html"
 
     def get(self, request, *args, **kwargs):
         profile_form = self.profile_form_class(instance=request.user.profile)
@@ -116,3 +105,16 @@ class PasswordChangeView(TemplateView):
             for msg in form.error_messages:
                 messages.error(request, f"{msg}: {form.error_messages[msg]}")
         return render(request, self.template_name, {'form': form})
+
+
+@method_decorator(login_required, name='dispatch')
+class AccountDashboardView(TemplateView):
+    """
+    Profile dashboard page of each user. Login is required to see this page
+    """
+    template_name = "accounts/dashboard.html"
+
+    def get(self, request, *args, **kwargs):
+        user = request.user.profile
+        context = {'user': user}
+        return render(request, self.template_name, context)
