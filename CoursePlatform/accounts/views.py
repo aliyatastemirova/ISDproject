@@ -10,11 +10,27 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class HomeView(TemplateView):
     """
     Homepage view, default view of the website
     """
     template_name = "accounts/homepage.html"
+
 
 
 class RegistrationFormView(View):
@@ -23,7 +39,7 @@ class RegistrationFormView(View):
     Necessary fields: username, email, password, repeat password
     """
     form_class = FullUserCreationForm
-    template_name = "accounts/register.html"
+    template_name = "accounts/register.html"    
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()

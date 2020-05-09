@@ -1,30 +1,87 @@
-{% load crispy_forms_tags %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Draft registration form</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.datepicker').datepicker();
-        });
-    </script>
-</head>
-<body>
-<form method="POST">
-    {% csrf_token %}
-    <fieldset>
-        <legend>
-            Create an account
-        </legend>
-        {{ form | crispy }}
-    </fieldset>
-    <div>
-        <button type="submit">Submit</button>
+{% extends 'base_frontend.html'  %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<section id="login-body" class="mt-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 center">
+                <div class="section_tittle text-center">
+                    <h2>Register</h2>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                
+                <form class="login-form" method="post" autocomplete="off">
+                    {% csrf_token %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                    {% for field in form %}
+                    {{ field.errors }}
+
+                    <label class="">
+                        <span>{{ field.label }} *</span>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                        
+                        
+                    </label>
+                    {% endfor %}
+
+                   
+
+                    <label>
+                        <span></span>
+                        <span class="sgn-cdn">
+                            
+                            <input type="checkbox" id="termsAgreed" name="agree">
+                            <label for="termsAgreed">By clicking you agreed to our</label> <a href="#">Terms & Conditions</a>
+                        </span>
+                    </label>
+                    <label>
+                        <span></span>
+                        <button type="submit" class="btn_1" >Login</button>
+                        
+                    </label>
+                    <label>
+                        <span></span>
+                        <a href="/register">Forger Your Password? </a>
+                    </label>
+                    <!-- <label>
+                        <span></span>
+                        <button type="submit" class="fb-login" >Facebook</button>
+                        <button type="submit" class="google-login">Google Plus</button>
+                        
+                    </label> -->
+                    <label class="mt-4">
+                        <span></span>
+                         Registered Already? <a href="/login">Login Now</a>
+                    </label>
+                </form>
+            </div>
+        </div>
     </div>
-</form>
-</body>
-</html>
+    
+</section>
+
+{% endblock %}
