@@ -7466,3 +7466,7 @@ form.login-form {
       width: 100%;
     }
 }
+.success{
+    
+    color: green;
+}

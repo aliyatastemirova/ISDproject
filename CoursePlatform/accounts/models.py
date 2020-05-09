@@ -3,15 +3,14 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import post_save
 from django_countries.fields import CountryField
-from django.contrib.auth.models import AbstractUser
+
 
 
 # Create your models here.
-class Student(AbstractUser):
-    """
-    Right now only users can be only students.
-    Student class uses AbstractUser for flexibility in future
-    """
+class Student(models.Model):
+   
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=100, null=False, unique=True)
 
     class Meta:

@@ -16,6 +16,13 @@
         </div>
         <div class="row">
             <div class="col-md-6 offset-md-3">
+                {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
                 
                 <form class="login-form" method="post" autocomplete="off">
                     {% csrf_token %}
@@ -52,15 +59,7 @@
 
                     <label>
                         <span></span>
-                        <span class="sgn-cdn">
-                            
-                            <input type="checkbox" id="termsAgreed" name="agree">
-                            <label for="termsAgreed">By clicking you agreed to our</label> <a href="#">Terms & Conditions</a>
-                        </span>
-                    </label>
-                    <label>
-                        <span></span>
-                        <button type="submit" class="btn_1" >Login</button>
+                        <button type="submit" class="btn_1" >Register</button>
                         
                     </label>
                     <label>
@@ -84,4 +83,12 @@
     
 </section>
 
+
+
+
+
+
 {% endblock %}
+
+
+

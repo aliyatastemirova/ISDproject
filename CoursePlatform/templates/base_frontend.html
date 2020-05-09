@@ -30,6 +30,8 @@
     
     <!-- style CSS -->
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+    <script src="{% static '/js/jquery-1.12.1.min.js' %}"></script>
     
 </head>
 <header class="main_menu home_menu">
@@ -139,7 +141,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- jquery plugins here-->
     <!-- jquery -->
-    <script src="{% static '/js/jquery-1.12.1.min.js' %}"></script>
     <!-- popper js -->
     <script src="{% static '/js/popper.min.js' %}"></script>
     
@@ -169,6 +170,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{% static '/js/waypoints.min.js' %}"></script>
  
     <script src="{% static '/js/custom.js' %}"></script>
+
+
+    <script>
+        $( document ).ready(function() {
+            $('#id_type').css("display", "inline");
+    
+            $('.nice-select').css("display", "none");
+    });
+    </script>
   
 </body>
 

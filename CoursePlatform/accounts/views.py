@@ -8,20 +8,9 @@ from .forms import FullUserCreationForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+from django.contrib.auth.models import User
+from django.views.generic.edit import FormView
+from django.contrib.auth.models import Group
 
 
 
@@ -33,28 +22,51 @@ class HomeView(TemplateView):
 
 
 
-class RegistrationFormView(View):
-    """
-    Registration form for new users.
-    Necessary fields: username, email, password, repeat password
-    """
+class RegistrationFormView(FormView):
+    
     form_class = FullUserCreationForm
-    template_name = "accounts/register.html"    
+    template_name = "accounts/register.html"
+    success_url = '/register/'  
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f"Your account has been successfully created")
-            return redirect("login")
+
+    def form_valid(self,form):
+
+        partnerId=Group.objects.filter(name="Partner").values_list('id',flat=True)
+           
+        user = User()
+        user.username=self.request.POST['username']
+        user.email=self.request.POST['email']
+        if self.request.POST['type'] == partnerId:
+            user.is_staff=True
         else:
-            for msg in form.error_messages:
-                messages.error(request, f"{msg}: {form.error_messages[msg]}")
-        return render(request, self.template_name, {'form': form})
+            user.is_staff=False
+
+        user.save()
+        user.groups.add(self.request.POST['type'])
+        messages.success(self.request, f"Your account has been successfully created")
+        return redirect("register")
+        
+        
+
+    # def post(self, request, *args, **kwargs):
+           
+    #     registration_form=self.form_class(request.POST)
+    #     if registration_form.is_valid:
+    #         user = User()
+    #         user.username=request.POST['username']
+    #         user.email=request.POST['email']
+    #         user.save()
+    #         user.groups.add(request.POST['type'])
+    #         messages.success(request, f"Your account has been successfully created")
+    #         return redirect("register")
+
+
+
+      
 
 
 @method_decorator(login_required, name='dispatch')
@@ -76,12 +88,14 @@ class AccountView(TemplateView):
 
         return render(request, self.template_name, context)
 
+   
+
     def post(self, request, *args, **kwargs):
         profile_form = self.profile_form_class(request.POST, request.FILES, instance=request.user.profile)
         user_form = self.user_form_class(request.POST, instance=request.user)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.save()
+            profile_form.save() 
             messages.success(request, f'Your account has been successfully updated')
             return redirect('account')
         else:

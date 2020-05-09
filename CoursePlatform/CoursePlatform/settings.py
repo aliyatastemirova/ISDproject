@@ -47,9 +47,7 @@ INSTALLED_APPS = [
     'embed_video'
 ]
 
-# Custom user authentication
 
-AUTH_USER_MODEL = 'accounts.Student'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
