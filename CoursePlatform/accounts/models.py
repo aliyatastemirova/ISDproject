@@ -1,21 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
-from django.db.models.signals import post_save
 from django_countries.fields import CountryField
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group
 
 
 # Create your models here.
-class Student(AbstractUser):
+class User(AbstractUser):
     """
-    Right now only users can be only students.
-    Student class uses AbstractUser for flexibility in future
+    Right now only users can be only students, added to Students group upon registration.
+    User class uses AbstractUser for flexibility in future
     """
     email = models.EmailField(max_length=100, null=False, unique=True)
 
     class Meta:
-        verbose_name_plural = "Students"
+        verbose_name_plural = "Users"
 
     def __str__(self):
         return self.username
@@ -48,3 +47,4 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
+students, created = Group.objects.get_or_create(name='Students')

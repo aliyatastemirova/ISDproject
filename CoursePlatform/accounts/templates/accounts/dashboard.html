@@ -1,0 +1,27 @@
+{% extends 'base_frontend.html'  %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<section id="login-body" class="mt-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 center">
+                <div class="section_tittle text-center">
+                    <h2>Your profile</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<h2>{{ user.username }}</h2>
+<img src="{{ user.profile_pic.url }}" alt="Profile picture" width="300" height="300">
+<p class="text-secondary">{{ user.email }}</p>
+<p class="text-secondary">{{ user.first_name }}</p>
+<p class="text-secondary">{{ user.get_gender_display }}</p>
+<p class="text-secondary">{{ user.birth_date }}</p>
+<p class="text-secondary">{{ user.get_country_display }}</p>
+<a href="update/">Update profile details</a>
+<a href="change_password/">Change password</a>
+
+{% endblock %}

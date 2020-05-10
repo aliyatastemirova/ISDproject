@@ -1,25 +1,84 @@
+{% extends 'base_frontend.html'  %}
+{% load static %}
 {% load crispy_forms_tags %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
+{% block content %}
+
+<section id="login-body" class="mt-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 center">
+                <div class="section_tittle text-center">
+                    <h2>Login</h2>
+                </div>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-            </small>
         </div>
-</body>
-</html>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+                <form class="login-form" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% for field in form %}
+                    {{ field.errors }}
+
+                    <label class="">
+                        <span>{{ field.label }} *</span>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+
+
+                    </label>
+                    {% endfor %}
+
+
+                    <label>
+                        <span></span>
+                        <span class="sgn-cdn">
+                            
+                            <input type="checkbox" id="termsAgreed" name="agree">
+                            <label for="termsAgreed">By clicking you agreed to our</label> <a href="#">Terms & Conditions</a>
+                        </span>
+                    </label>
+                    <label>
+                        <span></span>
+                        <button type="submit" class="btn_1">Login</button>
+
+                    </label>
+                    <label>
+                        <span></span>
+                        <a href="register">Forger Your Password? </a>
+                    </label>
+                    <!-- <label>
+                        <span></span>
+                        <button type="submit" class="fb-login" >Facebook</button>
+                        <button type="submit" class="google-login">Google Plus</button>
+                        
+                    </label> -->
+                    <label class="mt-4">
+                        <span></span>
+                        Not Registered Yet? <a href="/register">Register Now</a>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
