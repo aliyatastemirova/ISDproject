@@ -16,6 +16,11 @@ class FullUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
+        widgets = {
+            'username' : forms.TextInput(attrs = {'placeholder': 'Username'}),
+            'email'    : forms.EmailInput(attrs = {'placeholder': 'E-Mail'}),
+          
+        }
 
 
 class UserUpdateForm(forms.ModelForm):
