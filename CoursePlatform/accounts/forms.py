@@ -18,7 +18,7 @@ class FullUserCreationForm(UserCreationForm):
         fields = ["username", "email", "password1", "password2"]
         widgets = {
             'username' : forms.TextInput(attrs = {'placeholder': 'Username'}),
-            'email'    : forms.EmailInput(attrs = {'placeholder': 'E-Mail'}),
+            'email'    : forms.EmailField(attrs = {'placeholder': 'E-Mail'}),
           
         }
 
