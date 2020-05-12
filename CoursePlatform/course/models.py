@@ -4,6 +4,7 @@ from django.utils.html import escape
 from embed_video.fields import EmbedVideoField
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 
@@ -52,6 +53,7 @@ class Course(models.Model):
         subcategory=models.ForeignKey(SubCategory,on_delete=models.CASCADE)
         no_of_content=models.PositiveIntegerField()
         created = models.DateTimeField(auto_now_add=True, null=True)
+        created_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, blank=True, on_delete=models.SET_NULL)
         # created_by=models.ForeignKey(User)
         value = [
         (1, 'Active'),
@@ -75,9 +77,9 @@ class Course(models.Model):
         class Meta:
             verbose_name_plural = "Course"
 
-        # def save_model(self, request, obj, form, change):
-        #   obj.user = request.user
-        #   super(Post, self).save_model(request, obj, form, change)
+        def save_model(self, request, obj, form, change):
+          obj.created_by = request.user
+          obj.save()
 
 
 

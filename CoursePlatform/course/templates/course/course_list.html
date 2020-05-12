@@ -1,0 +1,114 @@
+{% extends 'base_frontend.html'  %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="inner-banner text-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+                  <h1>Filter Courses</h1>
+  
+  
+          <form class="form-inline search-form row">
+            <div class="col-md-2">
+              <select id="mounth">
+                <option value="">Course</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+                <option value="">Option 7</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="mounth">
+                <option value="">Level</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+                <option value="">Option 7</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="mounth">
+                <option value="">Duration</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+                <option value="">Option 7</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="mounth">
+                <option value="">Pricing</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+                <option value="">Option 7</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="mounth">
+                <option value="">Partner</option>
+                <option value="">Option 2</option>
+                <option value="">Option 3</option>
+                <option value="">Option 4</option>
+                <option value="">Option 5</option>
+                <option value="">Option 6</option>
+                <option value="">Option 7</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <input type="submit" value="search ">
+  
+            </div>
+  
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <section class="site-section inner-section">
+    <div class="container">
+      <div class="row course-row">
+          
+        {% for course in object_list %}
+            <div class="col-md-6">
+            <div class="mt-course">
+                <figure>
+                <a href="courses-details.html" class="course-image" style="background:url(  {{ course.thumbnail.url }})"></a>
+                </figure>
+                <div class="descriptions">
+                <h4 class="course-title"><a href="courses-details.html">{{ course.name}}
+                    </a>
+                </h4>
+                <ul class="entry-meta">
+                    <li><span>Total Eposide: </span>{{ course.no_of_content}}</li>
+                    <li><span>Category: </span>{{ course.category}}
+                      <li><span>Author: </span>{{ course.created_by}}
+                    
+                    </li>
+                  
+                </ul>
+                <p class="mt-label">${{ course.price}}</p>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+       
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
