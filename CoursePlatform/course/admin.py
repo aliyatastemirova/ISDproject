@@ -61,6 +61,9 @@ class CourseAdmin(SummernoteModelAdmin):
         ('Information', {'fields': ['what_student_will_learn','description','prerequisite','who_this_course_is_for'], 'classes': ['collapse']}),
     ]
     summernote_fields=('description','what_student_will_learn','prerequisite','who_this_course_is_for')
+    def save_model(self, request, obj, form, change):
+          obj.created_by =request.user
+          super().save_model(request, obj, form, change)
     inlines = [TagInline,ContentInline]
    
 

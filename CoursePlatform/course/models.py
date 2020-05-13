@@ -77,9 +77,7 @@ class Course(models.Model):
         class Meta:
             verbose_name_plural = "Course"
 
-        def save_model(self, request, obj, form, change):
-          obj.created_by =1
-          super().save_model(request, obj, form, change)
+        
 
 
 

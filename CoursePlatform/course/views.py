@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView,DetailView,View
-from . models import Course,Enroll
+from . models import Course,Enroll,CourseContent
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -20,9 +20,14 @@ class CourseList(ListView):
 
 
 
-class CourseDetailView(DetailView):
-     model=Course
+class CourseDetailView(View):
      template_name = "course/course_detail.html" 
+     def get(self, request, slug):
+           
+           queryset=Course.objects.get(slug=slug)
+           data=Enroll.objects.filter(course_id=queryset.id).exists()
+           return render(request, self.template_name, {'course': queryset,'enrolled':data})
+     
 
 
 
@@ -37,6 +42,13 @@ class EnrollStudent(View):
                return HttpResponse('Success')
             else:
                return HttpResponse('Already Enrolled')
+
+class CoursePlay(View):
+      template_name = "course/course_play.html" 
+      def get(self, request, slug):
+           course=Course.objects.get(slug=slug)
+           content=CourseContent.objects.filter(course=course.id)
+           return render(request, self.template_name, {'course': course,'content':content})
 
             
           

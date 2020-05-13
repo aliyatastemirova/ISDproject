@@ -26,7 +26,7 @@
   
                 <a data-fancybox="" href="">
   
-                  <img class="card-img-top img-fluid" src="{{ object.thumbnail.url }}">
+                  <img class="card-img-top img-fluid" src="{{ course.thumbnail.url }}">
   
                   <div class="icon"><i class="far fa-play-circle"></i></div>
   
@@ -37,18 +37,31 @@
             </div>
             <div class="col-md-4">
               <div class="short-details">
-                <h4>{{ object.name }}</h4>
+                <h4>{{ course.name }}</h4>
                 <ul class="entry-meta">
                     <li><span>Total Eposide: </span>{{ course.no_of_content}}</li>
                     <li><span>Category: </span>{{ course.category}}
-                      <li><span>Author: </span>{{ course.created_by}}
+                      <li><span>Author: </span>{{ course.created_by | title }}
+                        <li><span>data: </span>{{ course.enroll_set.created  }}
+                        
                     
                     </li>
                   
                 </ul>
                 <p class="mt-label">${{ course.price}}</p>
                 <div class="mt-anchor">
-                  <a href="/enroll/{{ course.slug }}" class="mt-btn">Enroll Now</a>
+                  {% if data == False %}
+                  <a href="/enroll/{{ course.slug }}" class="mt-btn"></a>
+                 
+
+                    Enroll Now
+                  </a>
+                  {% else %}
+                  <a href="/course/{{ course.slug }}/play" class="mt-btn">
+
+                    Play Now
+                  </a>
+                  {% endif %}
                 </div>
               </div>
             </div>

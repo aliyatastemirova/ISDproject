@@ -1,0 +1,76 @@
+{% extends 'base_frontend.html'  %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load embed_video_tags %}
+{% block content %}
+
+<div class="inner-banner text-center">
+    <div class="container">
+      <div class="row justify-content-center ">
+        <div class="col-md-12">
+          <h1>{{ course.name | title}}</h1>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="site-section inner-section py-0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row intro-video" style="margin-left: 50px;">
+            <div class="col-md-8">
+              <div id="mt-video">
+                {% for courses in content %}
+                {% if forloop.first %}
+                {% video courses.video_url '700x450' %}
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="short-details course-content">
+                <h4>Course Content</h4>
+                <div class="course-videos">
+
+                    {% for courses in content %}
+
+                    <div id="mt-video">
+                         {% video courses.video_url '100x70' %}
+                         <span class="mt-text">
+                             {{ courses.name }}
+
+                        </span>
+                    
+                    </div>
+                    {% endfor %}
+
+                   
+                    
+              
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <div class="course-video-descriptions">
+            <h2>{{ course.name | title}}</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, iusto. Iure, ducimus. Nobis earum adipisci
+              aut, modi ratione iure quo tenetur ullam maxime, voluptate eligendi iste veniam. Facere, fuga unde.</p>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
