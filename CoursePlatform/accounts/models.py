@@ -34,7 +34,7 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True,default="M")
     birth_date = models.DateField(max_length=30, null=True)
     country = CountryField(max_length=50, null=True)
     email_confirmed = models.BooleanField(default=False)

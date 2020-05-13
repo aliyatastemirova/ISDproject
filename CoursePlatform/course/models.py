@@ -78,8 +78,8 @@ class Course(models.Model):
             verbose_name_plural = "Course"
 
         def save_model(self, request, obj, form, change):
-          obj.created_by = request.user
-          obj.save()
+          obj.created_by =1
+          super().save_model(request, obj, form, change)
 
 
 
@@ -117,6 +117,18 @@ class CourseContent(models.Model):
 
       class Meta:
         verbose_name_plural = "Course Insight"
+
+class Enroll(models.Model):
+        course=models.ForeignKey(Course,on_delete=models.CASCADE)
+        user=models.ForeignKey(settings.AUTH_USER_MODEL,null=True, blank=True, on_delete=models.SET_NULL)
+        created = models.DateTimeField(auto_now_add=True, null=True)
+        value = [
+        (1, 'Yes'),
+        (0, 'No'),
+         ]
+        payment=models.PositiveSmallIntegerField(choices=value,default=1)
+
+
 
       
 

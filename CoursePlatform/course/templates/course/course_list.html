@@ -10,7 +10,7 @@
                   <h1>Filter Courses</h1>
   
   
-          <form class="form-inline search-form row">
+          <form class="form-inline search-form row" method="get" action='/course'>
             <div class="col-md-2">
               <select id="mounth">
                 <option value="">Course</option>
@@ -56,7 +56,7 @@
               </select>
             </div>
             <div class="col-md-2">
-              <select id="mounth">
+              <select id="mounth" name="test">
                 <option value="">Partner</option>
                 <option value="">Option 2</option>
                 <option value="">Option 3</option>
@@ -87,18 +87,18 @@
             <div class="col-md-6">
             <div class="mt-course">
                 <figure>
-                <a href="courses-details.html" class="course-image" style="background:url(  {{ course.thumbnail.url }})"></a>
+                <a href="{{ course.slug }}" class="course-image" style="background:url(  {{ course.thumbnail.url }})"></a>
                 </figure>
                 <div class="descriptions">
-                <h4 class="course-title"><a href="courses-details.html">{{ course.name}}
+                <h4 class="course-title"><a href="{{ course.slug }}">{{ course.name}}
                     </a>
                 </h4>
                 <ul class="entry-meta">
                     <li><span>Total Eposide: </span>{{ course.no_of_content}}</li>
-                    <li><span>Category: </span>{{ course.category}}
-                      <li><span>Author: </span>{{ course.created_by}}
-                    
-                    </li>
+                    <li><span>Category: </span>{{ course.category}}</li>
+                      <li><span>Author: </span>{{ course.created_by}}</li>
+                      <li><span>Enroll: </span>{{ course.enroll.user}}</li>
+                      
                   
                 </ul>
                 <p class="mt-label">${{ course.price}}</p>
