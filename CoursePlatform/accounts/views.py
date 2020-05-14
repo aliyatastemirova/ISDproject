@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import Group
 from .decorators import unauthenticated
+from course.models import Course,CourseContent,Enroll
 
 
 class HomeView(TemplateView):
@@ -58,6 +59,8 @@ class AccountUpdateView(TemplateView):
     def get(self, request, *args, **kwargs):
         profile_form = self.profile_form_class(instance=request.user.profile)
         user_form = self.user_form_class(instance=request.user)
+        purchasedCourseId=Enroll.objects.filter(user=request.user)
+        return HttpResponse(purchasedCourseId)
         context = {
             'user_form': user_form,
             'profile_form': profile_form

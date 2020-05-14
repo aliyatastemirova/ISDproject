@@ -25,9 +25,21 @@
             <div class="col-md-8">
               <div id="mt-video">
                 {% for courses in content %}
-                {% if forloop.first %}
-                {% video courses.video_url '700x450' %}
-                {% endif %}
+                  {% if play != 0 %}
+                   
+                   
+                    {% if courses.id == play %}
+                      {% video courses.video_url '700x450' %}
+                    {% endif %}
+
+                    
+                  {% else %}
+                    {% if forloop.first %}
+                    {% video courses.video_url '700x450' %}
+                    {% endif %}
+
+                  {% endif %}
+
                 {% endfor %}
               </div>
             </div>
@@ -36,15 +48,18 @@
                 <h4>Course Content</h4>
                 <div class="course-videos">
 
-                    {% for courses in content %}
+                    {% for data in content %}
 
                     <div id="mt-video">
-                         {% video courses.video_url '100x70' %}
+                      <a href="/course/{{ course.slug }}/play?play={{ data.id}}">                        
+                         {% video data.video_url '100x70' %}
                          <span class="mt-text">
-                             {{ courses.name }}
+                             {{ data.name }}
 
                         </span>
-                    
+                      </a>
+
+                        
                     </div>
                     {% endfor %}
 

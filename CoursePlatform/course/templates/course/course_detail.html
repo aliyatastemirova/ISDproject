@@ -19,20 +19,32 @@
   <section class="site-section inner-section">
     <div class="container">
       <div class="row">
+        {% if messages %}
+            <ul class="success" style="margin-left: 263px;
+            font-size: 20px;
+            color: green;
+            font-weight: 200;">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="col-md-12">
           <div class="row intro-video">
             <div class="col-md-8">
+              <a href="/course/{{ course.slug }}/play">
               <div id="mt-video">
   
-                <a data-fancybox="" href="">
+               
   
                   <img class="card-img-top img-fluid" src="{{ course.thumbnail.url }}">
   
                   <div class="icon"><i class="far fa-play-circle"></i></div>
   
-                </a>
+                
   
               </div>
+            </a>
   
             </div>
             <div class="col-md-4">
@@ -42,7 +54,7 @@
                     <li><span>Total Eposide: </span>{{ course.no_of_content}}</li>
                     <li><span>Category: </span>{{ course.category}}
                       <li><span>Author: </span>{{ course.created_by | title }}
-                        <li><span>data: </span>{{ course.enroll_set.created  }}
+                       
                         
                     
                     </li>
@@ -50,8 +62,8 @@
                 </ul>
                 <p class="mt-label">${{ course.price}}</p>
                 <div class="mt-anchor">
-                  {% if data == False %}
-                  <a href="/enroll/{{ course.slug }}" class="mt-btn"></a>
+                  {% if enrolled == 0 %}
+                  <a href="/enroll/{{ course.slug }}" class="mt-btn">
                  
 
                     Enroll Now

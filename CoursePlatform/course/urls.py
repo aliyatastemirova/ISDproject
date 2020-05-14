@@ -13,6 +13,7 @@ urlpatterns=[
    path('course/<slug:slug>/play/', CoursePlay.as_view()),
 
 
+
 ]
 
 
