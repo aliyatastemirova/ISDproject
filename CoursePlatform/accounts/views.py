@@ -1,7 +1,6 @@
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView
+from django.views.generic import TemplateView
 from django.views import View
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import FullUserCreationForm, ProfileUpdateForm, UserUpdateForm
@@ -10,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import Group
 from .decorators import unauthenticated
+from .models import User
 
 
 class HomeView(TemplateView):
@@ -36,7 +36,13 @@ class RegistrationFormView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             user = form.save()
-            group = Group.objects.get(name='Students')
+            user_type = request.POST.get('user_type')
+            if user_type == "1":
+                User.objects.filter(pk=request.user.pk).update(is_student=True)
+                group = Group.objects.get(name='Students')
+            elif user_type == "2":
+                User.objects.filter(pk=user.pk).update(is_partner=True)
+                group = Group.objects.get(name='Partners')
             user.groups.add(group)
             messages.success(request, f"Your account has been successfully created")
             return redirect("login")

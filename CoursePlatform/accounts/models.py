@@ -12,6 +12,8 @@ class User(AbstractUser):
     User class uses AbstractUser for flexibility in future
     """
     email = models.EmailField(max_length=100, null=False, unique=True)
+    is_student = models.BooleanField(null=False, default=False)
+    is_partner = models.BooleanField(null=False, default=False)
 
     class Meta:
         verbose_name_plural = "Users"
@@ -22,7 +24,7 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     """
-    Profile is created automatically when a Student user is created
+    Profile is created automatically when a user is created
     It's necessary to collect more information than what is gathered during registration
     """
     GENDER_CHOICES = (
@@ -48,3 +50,4 @@ class Profile(models.Model):
 
 
 students, created = Group.objects.get_or_create(name='Students')
+partners, created = Group.objects.get_or_create(name='Partners')
