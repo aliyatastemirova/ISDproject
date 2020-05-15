@@ -1,5 +1,12 @@
 # Changelog
 
+### 2020-05-14
+#### [#58mpt5](https://app.clickup.com/t/#58mpt5) - Add partner registration
+- Added Partners group, is_student and is_partner boolean fields in User model
+- Added a custom filter for Users in Django admin panel to filter by students or by partners
+- Added a better view for User and Profile models on Django admin panel
+- Added a possibility to view all Users that belong to a Group, easily remove or add users from the group
+
 ### 2020-05-09
 #### [#54nb2t](https://app.clickup.com/t/54nb2t) - Create a user dashboard
 - Added user dashboard view

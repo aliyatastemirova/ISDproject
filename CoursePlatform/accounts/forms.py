@@ -11,15 +11,16 @@ class FullUserCreationForm(UserCreationForm):
     """
     Extends standard usercreationform by including email address
     """
+    CHOICES = (('1', "Register as a Student",), ('2', "Register as a Partner",))
     email = forms.EmailField(required=True)
+    user_type = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
 
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2"]
+        fields = ["user_type", "username", "email", "password1", "password2"]
         widgets = {
-            'username' : forms.TextInput(attrs = {'placeholder': 'Username'}),
-            'email'    : forms.EmailInput(attrs = {'placeholder': 'E-Mail'}),
-          
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'E-Mail'}),
         }
 
 
