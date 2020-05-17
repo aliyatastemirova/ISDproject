@@ -11,8 +11,8 @@
             <h1>Quality Code for your ideas</h1>
             <p>Short description goes here</p>
 
-            <form action="" class="search-form d-flex">
-              <input type="text" placeholder="What are you searching for?" class="form-control">
+            <form action="/course" class="search-form d-flex" method="GET">
+              <input type="text" placeholder="What are you searching for?" name="key" class="form-control">
               <input type="submit" value="search ">
 
             </form>
@@ -74,98 +74,27 @@
   <div class="container">
     <div class="site-title">
 
-      <h2>Most Popular Corses</h2>
-      <//div> <div id="course-carousel">
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
+      <h2>Most Popular Coures</h2>
       </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
+       <div id="course-carousel">
+        {% for datum in data %}
+        <div class="item">
+          <a href="/course/{{ datum.slug }}" class="courses">
+            <figure>
+              <img src="{{ datum.thumbnail.url}}">
+              <figcaption>
+                <p>Course Time: 3 weeks</p>
+              </figcaption>
+            </figure>
+            <div class="descriptions">
+              <h3>{{ datum.name | title }}</h3>
+              <h5>{{ datum.no_of_content}} Episodes</h5>
+              <p class="mt-fee">Fee <span>${{datum.price}}</span></p>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+       
     </div>
   </div>
 </section>
@@ -175,102 +104,35 @@
     <div class="site-title">
 
       <h2>Top Masters Courses</h2>
-      <//div> <div id="masters-carousel">
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="courses">
-          <figure>
-            <img src="{% static '/images/1.jpg' %}">
-            <figcaption>
-              <p>Course Time: 3 weeks</p>
-            </figcaption>
-          </figure>
-          <div class="descriptions">
-            <h3>Java tutorial for complete begineers</h3>
-            <h5>10 Episodes</h5>
-            <p class="mt-fee">Fee <span>20 CHF</span></p>
-          </div>
-        </a>
-      </div>
+      </div> 
+      <div id="masters-carousel">
+
+      
+        {% for datum in data %}
+        <div class="item">
+          <a href="/course/{{ datum.slug }}" class="courses">
+            <figure>
+              <img src="{{ datum.thumbnail.url}}">
+              <figcaption>
+                <p>Course Time: 3 weeks</p>
+              </figcaption>
+            </figure>
+            <div class="descriptions">
+              <h3>{{ datum.name | title }}</h3>
+              <h5>{{ datum.no_of_content}} Episodes</h5>
+              <p class="mt-fee">Fee <span>${{datum.price}}</span></p>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+       
+
+      
     </div>
   </div>
 </section>
 <!--popular certifications-->
-<section class="site-section">
+<!-- <section class="site-section">
   <div class="container">
     <div class="site-title">
 
@@ -368,7 +230,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!--popular certifications-->
 <section class="site-section blue-bg">
   <div class="container">

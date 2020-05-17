@@ -4,6 +4,7 @@ from django.utils.html import escape
 from embed_video.fields import EmbedVideoField
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 
@@ -52,6 +53,7 @@ class Course(models.Model):
         subcategory=models.ForeignKey(SubCategory,on_delete=models.CASCADE)
         no_of_content=models.PositiveIntegerField()
         created = models.DateTimeField(auto_now_add=True, null=True)
+        created_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, blank=True, on_delete=models.SET_NULL)
         # created_by=models.ForeignKey(User)
         value = [
         (1, 'Active'),
@@ -75,9 +77,7 @@ class Course(models.Model):
         class Meta:
             verbose_name_plural = "Course"
 
-        # def save_model(self, request, obj, form, change):
-        #   obj.user = request.user
-        #   super(Post, self).save_model(request, obj, form, change)
+        
 
 
 
@@ -86,6 +86,7 @@ class CourseTag(models.Model):
         course=models.ForeignKey(Course,on_delete=models.CASCADE)
         name=models.CharField(max_length=50)
         slug=models.SlugField(unique=True)
+        created_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, blank=True, on_delete=models.SET_NULL)
         created = models.DateTimeField(auto_now_add=True, null=True)
 
         def __str__(self):
@@ -99,6 +100,8 @@ class CourseContent(models.Model):
       sort_order=models.PositiveSmallIntegerField(default=1)
       objective=models.TextField(blank=True,null=True)
       description=models.TextField(help_text="Detail about this Eposide")
+      created_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, blank=True, on_delete=models.SET_NULL)
+
       value = [
         (1, 'Yes'),
         (0, 'No'),
@@ -115,6 +118,18 @@ class CourseContent(models.Model):
 
       class Meta:
         verbose_name_plural = "Course Insight"
+
+class Enroll(models.Model):
+        course=models.ForeignKey(Course,on_delete=models.CASCADE)
+        user=models.ForeignKey(settings.AUTH_USER_MODEL,null=True, blank=True, on_delete=models.SET_NULL)
+        created = models.DateTimeField(auto_now_add=True, null=True)
+        value = [
+        (1, 'Yes'),
+        (0, 'No'),
+         ]
+        payment=models.PositiveSmallIntegerField(choices=value,default=1)
+
+
 
       
 

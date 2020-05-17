@@ -56,14 +56,18 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul id="menu-primary" class="navbar-nav">
                   <li><a href="/">Home</a></li>
-                  <li><a href="#">About Us</a></li>
+                  <!-- <li><a href="#">About Us</a></li> -->
                   <li><a href="/course">Courses</a></li>
-                  <li><a href="/contact">Contact Us</a></li>
+                  <!-- <li><a href="/contact">Contact Us</a></li> -->
                 </ul>
               </div>
             </nav>
             <div class="hdr-login order-2 order-lg-3">
-              <a href="/login/"><i class="far fa-user"></i> Login</a>
+              {% if user.is_authenticated %}
+                <a href="/profile/update"><i class="far fa-user"></i> {{ request.user}}</a>
+              {% else %}
+                <a href="/login/"><i class="far fa-user"></i>Login</a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -95,13 +99,13 @@
                   <div class="footer-widget">
                     <h6>Popular Courses</h6>
                     <ul>
-                      <li><a href="courses-details.html">Blockchain course(20)</a></li>
+                      <!-- <li><a href="courses-details.html">Blockchain course(20)</a></li>
                       <li><a href="courses-details.html">Sustainable Investment(23)</a></li>
                       <li><a href="courses-details.html">Impact Investing(15)</a></li>
                       <li><a href="courses-details.html">Javascript(20)</a></li>
                       <li><a href="courses-details.html">Web Development(20)</a></li>
                       <li><a href="courses-details.html">System Design(14)</a></li>
-                      <li><a href="courses-details.html">Science Fiction(13)</a></li>
+                      <li><a href="courses-details.html">Science Fiction(13)</a></li> -->
                     </ul>
                   </div>
                 </div>

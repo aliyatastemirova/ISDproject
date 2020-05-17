@@ -42,4 +42,11 @@ class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['profile_pic', 'first_name', 'last_name', 'gender', 'birth_date', 'country']
+        fields = ['profile_pic', 'first_name', 'last_name', 'birth_date']
+        widgets = {
+            'first_name' : forms.TextInput(attrs = {'placeholder': 'First Name'}),
+            'last_name' : forms.TextInput(attrs = {'placeholder': 'Last Name'}),
+            'birth_date' : forms.TextInput(attrs = {'placeholder': 'Date of Birth'}),
+        
+          
+        }

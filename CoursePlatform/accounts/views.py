@@ -10,13 +10,20 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import Group
 from .decorators import unauthenticated
 from .models import User
+from course.models import Course,CourseContent,Enroll
+from django.http import HttpResponse
 
 
-class HomeView(TemplateView):
+class HomeView(View):
     """
     Homepage view, default view of the website
     """
     template_name = "accounts/homepage.html"
+    def get(self, request, *args, **kwargs):
+        queryset=Course.objects.all()
+        return render(request, self.template_name, {'data': queryset})
+
+
 
 
 @method_decorator(unauthenticated, name='dispatch')
@@ -41,7 +48,7 @@ class RegistrationFormView(View):
                 User.objects.filter(pk=request.user.pk).update(is_student=True)
                 group = Group.objects.get(name='Students')
             elif user_type == "2":
-                User.objects.filter(pk=user.pk).update(is_partner=True)
+                User.objects.filter(pk=user.pk).update(is_partner=True,is_staff=True)
                 group = Group.objects.get(name='Partners')
             user.groups.add(group)
             messages.success(request, f"Your account has been successfully created")
@@ -64,6 +71,7 @@ class AccountUpdateView(TemplateView):
     def get(self, request, *args, **kwargs):
         profile_form = self.profile_form_class(instance=request.user.profile)
         user_form = self.user_form_class(instance=request.user)
+        purchasedCourseId=Enroll.objects.filter(user=request.user)
         context = {
             'user_form': user_form,
             'profile_form': profile_form
