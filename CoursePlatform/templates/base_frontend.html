@@ -33,6 +33,7 @@
    
     <!-- flaticon CSS -->
     <link rel="stylesheet" href="{% static '/css/media.css' %}">
+    <link rel="stylesheet" href="{% static '/css/toast-plugin.css' %}">
     
     
     <!-- style CSS -->
@@ -64,7 +65,7 @@
             </nav>
             <div class="hdr-login order-2 order-lg-3">
               {% if user.is_authenticated %}
-                <a href="/profile/update"><i class="far fa-user"></i> {{ request.user}}</a>
+                <a href="/profile/update"><i class="far fa-user"></i> {{ request.user |title }}</a>
               {% else %}
                 <a href="/login/"><i class="far fa-user"></i>Login</a>
               {% endif %}
@@ -151,6 +152,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.6/jquery.fancybox.min.js"></script>
     
     <script src="{% static '/js/custom.js' %}"></script>
+    <script src="{% static '/js/toast-plugin.js' %}"></script>
 
     <script>
 
@@ -163,7 +165,44 @@
 
       $('#id_username').attr('placeholder', 'Username');
 
+
+
+
+     
+
     </script>
+
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'success'%}
+        <script type=text/javascript>
+         var  message= '{{ message }}';
+          $.toast({
+                      heading: 'Success',
+                      text: message,
+                      icon: 'success',
+                      loader: true,        // Change it to false to disable loader
+                      loaderBg: '#4064AD',  // To change the background
+                      position:'top-right'
+                  })
+        </script>
+    {% elif message.tags == 'error'%}
+
+    <script type=text/javascript>
+      var  message= '{{ message }}';
+       $.toast({
+                   heading: 'Error',
+                   text: message,
+                   icon: 'error',
+                   loader: true,        // Change it to false to disable loader
+                   loaderBg: '#4064AD',  // To change the background
+                   position:'top-right'
+               })
+     </script>
+
+    {% endif %}
+{% endfor %}
+{% endif %}
   
 </body>
 

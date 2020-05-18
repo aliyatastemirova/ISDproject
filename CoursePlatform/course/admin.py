@@ -1,6 +1,6 @@
 from django.contrib import admin
 from embed_video.admin import AdminVideoMixin
-from .models import Category,SubCategory,Course,CourseContent,CourseTag
+from .models import Category,SubCategory,Course,CourseContent,CourseTag,Enroll
 from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
@@ -53,9 +53,10 @@ class ContentInline(admin.StackedInline):
     extra = 1
 
 
+
 class CourseAdmin(SummernoteModelAdmin):
 
-    list_display=('id','category','subcategory','name','no_of_content','image_display')
+    list_display=('id','category','subcategory','name','no_of_content','enrolled_student')
     list_display_links=('id','category','subcategory','name')
     fieldsets = [
         ('Basic Details',{'fields': ['category','subcategory','name','no_of_content','slug','price','thumbnail']}),
@@ -66,13 +67,17 @@ class CourseAdmin(SummernoteModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         if request.user.is_superuser:
-                return qs
+            return qs
         return qs.filter(created_by=request.user)
         
    
     def save_model(self, request, obj, form, change):
           obj.created_by =request.user
           super().save_model(request, obj, form, change)
+
+    def enrolled_student(self,obj):
+        return Enroll.objects.filter(course=obj.id).count()
+          
 
     inlines = [TagInline,ContentInline]
    

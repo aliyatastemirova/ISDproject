@@ -7,7 +7,7 @@ from .forms import FullUserCreationForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group,User
 from .decorators import unauthenticated
 from .models import User
 from course.models import Course,CourseContent,Enroll
@@ -20,8 +20,20 @@ class HomeView(View):
     """
     template_name = "accounts/homepage.html"
     def get(self, request, *args, **kwargs):
+
         queryset=Course.objects.all()
-        return render(request, self.template_name, {'data': queryset})
+        partner=User.objects.filter(is_partner=True).count()
+        student=User.objects.filter(is_student=True).count()
+        course=queryset.count()
+        enroll=Enroll.objects.all().count()
+        context = {
+            'data': queryset,
+            'partner':partner,
+            'student':student,
+            'course':course,
+            'enroll':enroll,
+        }
+        return render(request, self.template_name,context)
 
 
 
@@ -71,10 +83,12 @@ class AccountUpdateView(TemplateView):
     def get(self, request, *args, **kwargs):
         profile_form = self.profile_form_class(instance=request.user.profile)
         user_form = self.user_form_class(instance=request.user)
-        purchasedCourseId=Enroll.objects.filter(user=request.user)
+        purchasedCoure=Course.objects.filter(enroll__user=request.user)
+
         context = {
             'user_form': user_form,
-            'profile_form': profile_form
+            'profile_form': profile_form,
+            'purchasedCourse':purchasedCoure
         }
 
         return render(request, self.template_name, context)
@@ -86,7 +100,7 @@ class AccountUpdateView(TemplateView):
             user_form.save()
             profile_form.save()
             messages.success(request, f'Your account has been successfully updated')
-            return redirect('account')
+            return redirect('/profile/update')
         else:
             messages.error(request, 'Please fill out the fields correctly')
         context = {

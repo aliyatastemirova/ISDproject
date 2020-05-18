@@ -9,7 +9,7 @@
     <div class="container">
       <div class="row justify-content-center ">
         <div class="col-md-12">
-          <h1>{{ object.name }}</h1>
+          <h1>{{ course.name | title }}</h1>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
   <section class="site-section inner-section">
     <div class="container">
       <div class="row">
-        {% if messages %}
+        <!-- {% if messages %}
             <ul class="success" style="margin-left: 263px;
             font-size: 20px;
             color: green;
@@ -28,7 +28,7 @@
                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
             </ul>
-        {% endif %}
+        {% endif %} -->
         <div class="col-md-12">
           <div class="row intro-video">
             <div class="col-md-8">
@@ -92,19 +92,19 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
               <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-               {{ object.description | safe }}
+               {{ course.description | safe }}
               </div>
 
 
               <div class="tab-pane " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                {{ object.prerequisite | safe }}
+                {{ course.prerequisite | safe }}
               
               </div>
 
 
 
               <div class="tab-pane" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                {{ object.who_this_course_is_for | safe }}
+                {{ course.who_this_course_is_for | safe }}
               </div>
   
             </div>
@@ -117,6 +117,8 @@
     </div>
   </section>
 
+
+  
 
 
 

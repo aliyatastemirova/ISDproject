@@ -234,6 +234,8 @@ section.site-section {
 
 .courses figure img {
     transition: all 0.5s ease;
+    height: 170px;
+    object-fit: cover;
 }
 
 .courses figcaption {

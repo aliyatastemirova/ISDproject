@@ -8,11 +8,11 @@
         <div class="col-md-7">
           <div class="banner-context">
 
-            <h1>Quality Code for your ideas</h1>
-            <p>Short description goes here</p>
+            <h1>Best Learning Platform</h1>
+            <p>Search among 1000's of courses</p>
 
             <form action="/course" class="search-form d-flex" method="GET">
-              <input type="text" placeholder="What are you searching for?" name="key" class="form-control">
+              <input type="text" placeholder="What are you planning to learn?" name="key" class="form-control" required>
               <input type="submit" value="search ">
 
             </form>
@@ -38,33 +38,33 @@
       <div class="gs-point ">
         <div class="counter-point">
           <span class="counter">
-            1024
+            {{ partner }}
           </span>
         </div>
-        <p>Teachers</p>
+        <p>All Teachers</p>
       </div>
       <div class="gs-point ">
         <div class="counter-point">
           <span class="counter">
-            960 </span>
+            {{ student }} </span>
         </div>
         <p>All Students</p>
       </div>
       <div class="gs-point ">
         <div class="counter-point">
           <span class="counter">
-            1009
+            {{ course }}
           </span>
         </div>
-        <p>Online Students</p>
+        <p>Available Courses</p>
       </div>
       <div class="gs-point ">
         <div class="counter-point">
           <span class="counter">
-            809
+            {{ enroll }}
           </span>
         </div>
-        <p>Offline Students</p>
+        <p>Enrolled Course</p>
       </div>
     </div>
   </div>
@@ -74,16 +74,16 @@
   <div class="container">
     <div class="site-title">
 
-      <h2>Most Popular Coures</h2>
+      <h2>Most Popular Courses</h2>
       </div>
        <div id="course-carousel">
         {% for datum in data %}
         <div class="item">
           <a href="/course/{{ datum.slug }}" class="courses">
             <figure>
-              <img src="{{ datum.thumbnail.url}}">
+              <img src="{{ datum.thumbnail.url}}" style="width: 100%;">
               <figcaption>
-                <p>Course Time: 3 weeks</p>
+                <p>Course Time:  {{ forloop.counter }} weeks</p>
               </figcaption>
             </figure>
             <div class="descriptions">
@@ -108,11 +108,11 @@
       <div id="masters-carousel">
 
       
-        {% for datum in data %}
+        {% for datum in data reversed%}
         <div class="item">
           <a href="/course/{{ datum.slug }}" class="courses">
             <figure>
-              <img src="{{ datum.thumbnail.url}}">
+              <img src="{{ datum.thumbnail.url}}" style="width: 100%;">
               <figcaption>
                 <p>Course Time: 3 weeks</p>
               </figcaption>
@@ -238,15 +238,14 @@
       <div class="item">
         <div class="user-testimonials">
           <div class="user-intro d-flex">
-            <img class="user-avatar" src="{% static '/images/speaker1.jpg' %}" alt="banner_img">
+            <img class="user-avatar" src="{% static '/images/marc.jpg' %}" alt="banner_img">
             <div class="user-detail">
               <div class="testimonial-contents">
-                <p>Duis sagittis, est convallis aliquet tincidunt, est tellus ornare est, non blandit ipsum velit vel
-                  eros. Quisque viverra in urna in auctor. Donec id diam semper, sollicitudin ipsum a, feugiat odio.
-                  In
-                  rutrum odio in sapien porttitor, ut fringilla augue eleifend.</p>
-                <h4 class="user-name">Marc Andre</h4>
-                <h6 class="mt-designation">CEO, ABC Company</h6>
+                <p>
+                  Live anywhere ,learn everywhere 
+                </p>
+                <h4 class="user-name">Dr. iur. Marc-André Schauwecker</h4>
+                <h6 class="mt-designation">President of SAMB,VP-Senior Legal Counsel, Credit Suisse</h6>
               </div>
             </div>
           </div>
@@ -255,16 +254,15 @@
       <div class="item">
         <div class="user-testimonials">
           <div class="user-intro d-flex">
-            <img class="user-avatar" src="{% static '/images/speaker1.jpg' %}" alt="banner_img">
+            <img class="user-avatar" src="{% static '/images/megha.jpeg' %}" alt="banner_img">
             <div class="user-detail">
 
               <div class="testimonial-contents">
-                <p>Duis sagittis, est convallis aliquet tincidunt, est tellus ornare est, non blandit ipsum velit vel
-                  eros. Quisque viverra in urna in auctor. Donec id diam semper, sollicitudin ipsum a, feugiat odio.
-                  In
-                  rutrum odio in sapien porttitor, ut fringilla augue eleifend.</p>
-                  <h4 class="user-name">Marc Andre</h4>
-                <h6 class="mt-designation">CEO, ABC Company</h6>
+                <p>
+                  Border doesn't stop learning minds
+                </p>
+                  <h4 class="user-name">Megha Shrestha</h4>
+                <h6 class="mt-designation">Events and Communication Manager, SAMBA</h6>
               </div>
             </div>
           </div>

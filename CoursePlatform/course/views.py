@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView,DetailView,View
-from . models import Course,Enroll,CourseContent,Category,SubCategory
+from . models import Course,Enroll,CourseContent,Category,SubCategory,CourseTag
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+from django.db.models import Q
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -16,7 +18,8 @@ class CourseList(ListView):
           if request.GET.get('key'):
                key=request.GET.get('key')
 
-               queryset=Course.objects.filter(name__icontains=key)
+               queryset=Course.objects.filter(Q(name__icontains=key))
+          
                
           else:
                queryset=Course.objects.all()
@@ -30,10 +33,17 @@ class CourseDetailView(View):
      template_name = "course/course_detail.html" 
      def get(self, request, slug):
            
-           queryset=Course.objects.get(slug=slug)
-           data=Enroll.objects.filter(course_id=queryset.id).exists()
-          #  return HttpResponse(data)
-           return render(request, self.template_name, {'course': queryset,'enrolled':data})
+          queryset=Course.objects.get(slug=slug)
+          # return HttpResponse(queryset.description)
+          if request.user.is_authenticated:
+                
+               datas=Enroll.objects.filter(Q(course=queryset.id) ,Q(user=request.user)).exists()
+               
+          else:
+               datas=False
+          
+        
+          return render(request, self.template_name, {'course': queryset,'enrolled':datas})
      
 
 
@@ -63,15 +73,23 @@ class CoursePlay(View):
            else:
                play=0
            course=Course.objects.get(slug=slug)
+           tag=CourseTag.objects.filter(course=course.id)
            hasEnrolled=Enroll.objects.filter(course=course,user=request.user).exists()
            if hasEnrolled == False:
                messages.success(request, f"Please Enroll First")
                return redirect('/course/'+slug)
 
            content=CourseContent.objects.filter(course=course.id)
+
+           context = {
+            'content': content,
+            'course': course,
+            'play':play,
+            'tag':tag
+        }
            
            
-           return render(request, self.template_name, {'course': course,'content':content,'play':play})
+           return render(request, self.template_name,context)
 
 
 

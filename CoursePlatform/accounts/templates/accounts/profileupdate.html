@@ -113,7 +113,7 @@
                                                 {{ profile_form|crispy }}
                                             </fieldset> -->
                                             <div class="form-group">
-                                                <button class="btn btn-outline-info" type="submit">Update</button>
+                                                <button class="mt-btn" type="submit">Update</button>
                                             </div>
                                           </div>
                                 </form>
@@ -128,7 +128,7 @@
                                                   <thead>
                                                       <tr>
                                                           <th scope="col">Course Title</th>
-                                                          <th scope="col">Purchased Date</th>
+                                                          <th scope="col">Purchased Price</th>
                                                           <th scope="col">Total Eposide</th>
                                                           <th scope="col">Course Mentor</th>
                                                           <th scope="col">Details</th>
@@ -136,13 +136,15 @@
                                                       </tr>
                                                   </thead>
                                                   <tbody>
+                                                      {% for course in purchasedCourse%}
                                                       <tr>
-                                                          <td scope="row">Java Programming</td>
-                                                          <td>19 May 2019</td>
-                                                          <td>120 hrs</td>
-                                                          <td>Jon Doe</td>
-                                                          <td><a href="#">View Details</a></td>
+                                                          <td scope="row">{{ course.name}}</td>
+                                                          <td>$ {{ course.price }}</td>
+                                                          <td>{{ course.no_of_content }}</td>
+                                                          <td>{{ course.created_by }}</td>
+                                                          <td><a href="/course/{{course.slug}}/play">View Course</a></td>
                                                       </tr>
+                                                      {% endfor %}
                                                      
                                               
                                               </tbody>
