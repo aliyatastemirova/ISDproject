@@ -1,134 +1,140 @@
-
 {% extends 'base_frontend.html'  %}
 {% load static %}
 {% block content %}
 <div class="banner-section">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-7">
-          <div class="banner-context">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <div class="banner-context">
 
-            <h1>Best Learning Platform</h1>
-            <p>Search among 1000's of courses</p>
+                    <h1>Best Learning Platform</h1>
+                    <p>Search among 1000's of courses</p>
 
-            <form action="/course" class="search-form d-flex" method="GET">
-              <input type="text" placeholder="Search courses" name="key" class="form-control" required>
-              <input type="submit" value="search ">
+                    <form action="/course" class="search-form d-flex" method="GET">
+                        <input type="text" placeholder="Search courses" name="key" class="form-control" required>
+                        <input type="submit" value="search ">
 
-            </form>
-          </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-5">
+
+
+                <div class="banner-image">
+
+                    <img src="{% static '/images/banner-hero.png' %}" alt="">
+                </div>
+            </div>
         </div>
-        <div class="col-md-5">
-
-
-          <div class="banner-image">
-
-            <img src="{% static '/images/banner-hero.png' %}" alt="">
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 </div>
 <!-- counter section starts here -->
 <section id="gs-counter" class="text-center py-5">
-  <div class="container-fluid">
-    <div class="row mt-counter d-flex justify-content-center wow fadeInUp" data-wow-offset="0" data-wow-delay="300ms ">
-      <div class="col gs-point">
-        <div class="counter-point">
+    <div class="container">
+        <div class="row wow fadeInUp px-3" data-wow-offset="0" data-wow-delay="300ms ">
+            <!-- Counter Item -->
+            <div class="col-6 col-md-3 gs-point">
+                <div class="counter-point">
           <span class="counter">
             {{ partner }}
           </span>
-        </div>
-        <p>All Teachers</p>
-      </div>
-      <div class="col gs-point">
-        <div class="counter-point">
+                </div>
+                <p>All Teachers</p>
+            </div>
+            <!-- .Counter Item -->
+            <!-- Counter Item -->
+            <div class="col-6 col-md-3 gs-point">
+                <div class="counter-point">
           <span class="counter">
-            {{ student }} </span>
-        </div>
-        <p>All Students</p>
-      </div>
-      <div class="col gs-point">
-        <div class="counter-point">
+            {{ student }}
+          </span>
+                </div>
+                <p>All Students</p>
+            </div>
+            <!-- .Counter Item -->
+            <!-- Counter Item -->
+            <div class="col-6 col-md-3 gs-point">
+                <div class="counter-point">
           <span class="counter">
             {{ course }}
           </span>
-        </div>
-        <p>Available Courses</p>
-      </div>
-      <div class="col gs-point">
-        <div class="counter-point">
+                </div>
+                <p>Available Courses</p>
+            </div>
+            <!-- .Counter Item -->
+            <!-- Counter Item -->
+            <div class="col-6 col-md-3 gs-point">
+                <div class="counter-point">
           <span class="counter">
             {{ enroll }}
           </span>
+                </div>
+                <p>Enrolled Courses</p>
+            </div>
+            <!-- .Counter Item -->
         </div>
-        <p>Enrolled Courses</p>
-      </div>
     </div>
-  </div>
 </section>
 <!--latest courser-->
 <section class="site-section">
-  <div class="container">
-    <div class="site-title">
-
-      <h2>Most Popular Courses</h2>
-      </div>
-       <div id="course-carousel">
-        {% for datum in data %}
-        <div class="item">
-          <a href="/course/{{ datum.slug }}" class="courses">
-            <figure>
-              <img src="{{ datum.thumbnail.url}}" style="width: 100%;">
-              <figcaption>
-                <p>Course Time:  {{ forloop.counter }} weeks</p>
-              </figcaption>
-            </figure>
-            <div class="descriptions">
-              <h3>{{ datum.name | title }}</h3>
-              <h5>{{ datum.no_of_content}} Episodes</h5>
-              <p class="mt-fee">Fee <span>${{datum.price}}</span></p>
-            </div>
-          </a>
+    <div class="container">
+        <div class="site-title">
+            <h2>Most Popular Courses</h2>
         </div>
-        {% endfor %}
-       
+        <div id="course-carousel">
+            {% for datum in data %}
+            <div class="item">
+                <a href="/course/{{ datum.slug }}" class="courses">
+                    <figure>
+                        <img src="{{ datum.thumbnail.url}}" style="width: 100%;">
+                        <figcaption>
+                            <p>Course Time: {{ forloop.counter }} weeks</p>
+                        </figcaption>
+                    </figure>
+                    <div class="descriptions">
+                        <h3>{{ datum.name | title }}</h3>
+                        <h5>{{ datum.no_of_content}} Episodes</h5>
+                        <p class="mt-fee">Fee <span>${{datum.price}}</span></p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+        </div>
     </div>
-  </div>
 </section>
 <!--popular certifications-->
 <section class="site-section">
-  <div class="container">
-    <div class="site-title">
+    <div class="container">
+        <div class="site-title">
 
-      <h2>Top Masters Courses</h2>
-      </div> 
-      <div id="masters-carousel">
-
-      
-        {% for datum in data reversed%}
-        <div class="item">
-          <a href="/course/{{ datum.slug }}" class="courses">
-            <figure>
-              <img src="{{ datum.thumbnail.url}}" style="width: 100%;">
-              <figcaption>
-                <p>Course Time: 3 weeks</p>
-              </figcaption>
-            </figure>
-            <div class="descriptions">
-              <h3>{{ datum.name | title }}</h3>
-              <h5>{{ datum.no_of_content}} Episodes</h5>
-              <p class="mt-fee">Fee <span>${{datum.price}}</span></p>
-            </div>
-          </a>
+            <h2>Top Masters Courses</h2>
         </div>
-        {% endfor %}
-       
+        <div id="masters-carousel">
 
-      
+
+            {% for datum in data reversed%}
+            <div class="item">
+                <a href="/course/{{ datum.slug }}" class="courses">
+                    <figure>
+                        <img src="{{ datum.thumbnail.url}}" style="width: 100%;">
+                        <figcaption>
+                            <p>Course Time: 3 weeks</p>
+                        </figcaption>
+                    </figure>
+                    <div class="descriptions">
+                        <h3>{{ datum.name | title }}</h3>
+                        <h5>{{ datum.no_of_content}} Episodes</h5>
+                        <p class="mt-fee">Fee <span>${{datum.price}}</span></p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+
+        </div>
     </div>
-  </div>
 </section>
 <!--popular certifications-->
 <!-- <section class="site-section">
@@ -232,44 +238,44 @@
 </section> -->
 <!--popular certifications-->
 <section class="site-section blue-bg">
-  <div class="container">
-    <div id="testimonial-carousel">
-      <div class="item">
-        <div class="user-testimonials">
-          <div class="user-intro d-flex">
-            <img class="user-avatar" src="{% static '/images/marc.jpg' %}" alt="banner_img">
-            <div class="user-detail">
-              <div class="testimonial-contents">
-                <p>
-                  Live anywhere ,learn everywhere 
-                </p>
-                <h4 class="user-name">Dr. iur. Marc-André Schauwecker</h4>
-                <h6 class="mt-designation">President of SAMB,VP-Senior Legal Counsel, Credit Suisse</h6>
-              </div>
+    <div class="container">
+        <div id="testimonial-carousel">
+            <div class="item">
+                <div class="user-testimonials">
+                    <div class="user-intro d-flex">
+                        <img class="user-avatar" src="{% static '/images/marc.jpg' %}" alt="banner_img">
+                        <div class="user-detail">
+                            <div class="testimonial-contents">
+                                <p>
+                                    Live anywhere ,learn everywhere
+                                </p>
+                                <h4 class="user-name">Dr. iur. Marc-André Schauwecker</h4>
+                                <h6 class="mt-designation">President of SAMB,VP-Senior Legal Counsel, Credit Suisse</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="user-testimonials">
-          <div class="user-intro d-flex">
-            <img class="user-avatar" src="{% static '/images/megha.jpeg' %}" alt="banner_img">
-            <div class="user-detail">
+            <div class="item">
+                <div class="user-testimonials">
+                    <div class="user-intro d-flex">
+                        <img class="user-avatar" src="{% static '/images/megha.jpeg' %}" alt="banner_img">
+                        <div class="user-detail">
 
-              <div class="testimonial-contents">
-                <p>
-                  Border doesn't stop learning minds
-                </p>
-                  <h4 class="user-name">Megha Shrestha</h4>
-                <h6 class="mt-designation">Events and Communication Manager, SAMBA</h6>
-              </div>
+                            <div class="testimonial-contents">
+                                <p>
+                                    Border doesn't stop learning minds
+                                </p>
+                                <h4 class="user-name">Megha Shrestha</h4>
+                                <h6 class="mt-designation">Events and Communication Manager, SAMBA</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-
         </div>
-      </div>
     </div>
-  </div>
 
 </section>
 

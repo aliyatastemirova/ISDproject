@@ -98,7 +98,7 @@
                                             <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                                                 <i class="fas fa-user fa-lg"></i>
                                             </div>
-                                            <div class="col">
+                                            <div class="col text-center text-md-left mt-2">
                                                 <div class="h5">Username</div>
                                                 <span class="h6">{{ user.username }}</span>
                                             </div>
@@ -110,9 +110,13 @@
                                             <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                                                 <i class="fas fa-user fa-lg"></i>
                                             </div>
-                                            <div class="col">
+                                            <div class="col text-center text-md-left mt-2">
                                                 <div class="h5">First Name</div>
+                                                {% if user.profile.first_name is not None %}
                                                 <span class="h6">{{ user.profile.first_name }}</span>
+                                                {% else %}
+                                                <span class="h6">No First Name added</span>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -122,9 +126,13 @@
                                             <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                                                 <i class="fas fa-user fa-lg"></i>
                                             </div>
-                                            <div class="col">
+                                            <div class="col text-center text-md-left mt-2">
                                                 <div class="h5">Last Name</div>
+                                                {% if user.profile.last_name is not None %}
                                                 <span class="h6">{{ user.profile.last_name }}</span>
+                                                {% else %}
+                                                <span class="h6">No Last Name added</span>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +142,7 @@
                                             <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
                                                 <i class="fas fa-at fa-lg"></i>
                                             </div>
-                                            <div class="col">
+                                            <div class="col text-center text-md-left mt-2">
                                                 <div class="h5">Email</div>
                                                 <span class="h6">{{ user.email }}</span>
                                             </div>

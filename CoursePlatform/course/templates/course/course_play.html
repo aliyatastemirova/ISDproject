@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% load embed_video_tags %}
 {% block content %}
-
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
 <div class="inner-banner text-center">
     <div class="container">
       <div class="row justify-content-center ">
@@ -18,62 +18,53 @@
 </div>
 
 <section class="site-section inner-section py-0">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row intro-video" style="margin-left: 50px;">
-            <div class="col-md-8">
-              <div id="mt-video">
-                {% for courses in content %}
-                  {% if play != 0 %}
-                   
-                   
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 px-0">
+                <!--  Video Container Fluid -->
+                <div class="embed-container">
+                    {% for courses in content %}
+                    {% if play != 0 %}
+
+
                     {% if courses.id == play %}
-                      {% video courses.video_url '700x450' %}
+                    {% video courses.video_url '700x450' %}
                     {% endif %}
 
-                    
-                  {% else %}
+
+                    {% else %}
                     {% if forloop.first %}
                     {% video courses.video_url '700x450' %}
                     {% endif %}
 
-                  {% endif %}
+                    {% endif %}
 
-                {% endfor %}
-              </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="col-md-4">
-              <div class="short-details course-content">
-                <h4>Course Content</h4>
-                <div class="course-videos">
+            <div class="col-md-4 c-course-content py-3">
+                <!-- Content of the course (videos) -->
+                <h4 class="lead font-weight-bold">Course Content</h4>
+
 
                     {% for data in content %}
-
-                    <div id="mt-video">
-                      <a href="/course/{{ course.slug }}/play?play={{ data.id}}">                        
-                         {% video data.video_url '100x70' %}
-                         <span class="mt-text">
-                             {{ data.name }}
-
-                        </span>
-                      </a>
-
-                        
+                    <div class="row no-gutters">
+                        <div class="col-md-5 d-flex justify-content-start align-items-center">
+                            <a href="/course/{{ course.slug }}/play?play={{ data.id}}">
+                            {% video data.video_url '100x70' %}
+                            </a></div>
+                        <div class="col-md-5 pl-md-4 pl-lg-1">{{ data.name }}</div>
                     </div>
+
                     {% endfor %}
 
-                   
-                    
-              
 
-                </div>
-              </div>
+
             </div>
-          </div>
         </div>
-      </div>
     </div>
+
     <div class="container">
       <div class="row">
         <div class="col-md-10">

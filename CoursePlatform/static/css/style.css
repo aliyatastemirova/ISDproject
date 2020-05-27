@@ -417,10 +417,7 @@ footer {
     text-align: center;
 }
 
-nav.navbar.navbar-expand-lg.navbar-light {
-    margin-right: auto;
-    margin-left: 60px;
-}
+
 
 .hdr-login a {
     color: #333;
@@ -714,7 +711,7 @@ ul.select-options {
 
 .select-styled:after {
     position: absolute;
-    font-family: "Font Awesome 5 Free"; font-weight: 600; content: "\f0d7";
+    font-family: "Font Awesome 5 Free"; font-weight: 600; content: "\f078";
     top: 0px;
     font-size: 14px;
     opacity: 0.6;
@@ -1409,7 +1406,16 @@ span.mt-time {
     color: #fff;
 }
 
+/* Hide the default select field */
 .select-hidden {
     display: none;
 }
 
+/* Course content sidebar */
+.c-course-content {
+color: white;
+    background: #4064AD;
+    box-shadow: 0 30px 60px 0 rgba(31, 36, 48, 0.2);
+}
+
+}
