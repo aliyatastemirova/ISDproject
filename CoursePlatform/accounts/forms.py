@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django_countries.fields import CountryField
 from .models import User, Profile
 from functools import partial
 
@@ -39,14 +38,12 @@ class ProfileUpdateForm(forms.ModelForm):
     """
     profile_pic = forms.ImageField(label='Profile picture', required=False,
                                    error_messages={'invalid': "Image files only"}, widget=forms.FileInput)
+    birth_date = forms.DateField()
 
     class Meta:
         model = Profile
-        fields = ['profile_pic', 'first_name', 'last_name', 'birth_date']
+        fields = ['profile_pic', 'first_name', 'last_name', 'gender', 'birth_date', 'country']
         widgets = {
-            'first_name' : forms.TextInput(attrs = {'placeholder': 'First Name'}),
-            'last_name' : forms.TextInput(attrs = {'placeholder': 'Last Name'}),
-            'birth_date' : forms.TextInput(attrs = {'placeholder': 'Date of Birth'}),
-        
-          
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'})
         }

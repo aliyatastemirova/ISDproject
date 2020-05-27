@@ -8,6 +8,14 @@ User = get_user_model()
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
+    """
+    Creates a profile when a new user is created
+    :param sender: User model
+    :param instance: new user instance
+    :param created: if a user is created (bool)
+    :param kwargs:
+    :return:
+    """
     if created:
         Profile.objects.create(user=instance)
 

@@ -34,25 +34,33 @@ class GroupAdminForm(forms.ModelForm):
 
 class NewGroupAdmin(GroupAdmin):
     """
-    Customized GroupAdmin class that uses the customized form to allow
-    management of users within a group.
+    Customized GroupAdmin class that uses the customized form to allow user management within a group.
     """
     form = GroupAdminForm
     list_display = ["name", "pk"]
 
 
 class UserTypeFilter(SimpleListFilter):
+    """
+    Allows filtering users by their type (student or partner)
+    """
     title = 'User type'
     parameter_name = 'user_type'
 
     def lookups(self, request, model_admin):
-        # We have two filter options
+        """
+        We have two filter options
+        :return: a list of tuples with filter options
+        """
         return [
             ('is_student', 'Student'),
             ('is_partner', 'Partner'),
         ]
 
     def queryset(self, request, queryset):
+        """
+        Filters by selected options
+        """
         # Filter by selected options
         if self.value() == 'is_student':
             return queryset.distinct().filter(is_student=True)
@@ -61,6 +69,9 @@ class UserTypeFilter(SimpleListFilter):
 
 
 class UserAdmin(admin.ModelAdmin):
+    """
+    Admin class for Users, allows to use the custom user type filter and to display all attributes in the admin panel
+    """
     # Add the option to filter by user type
     list_filter = [UserTypeFilter]
     # Display all fields in admin panel
@@ -68,7 +79,9 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    # Display all fields in admin panel
+    """
+    Admin class for Profiles, allows to display all attributes in the Django admin panel
+    """
     list_display = ['id', 'first_name', 'last_name', 'gender', 'birth_date', 'country']
 
 

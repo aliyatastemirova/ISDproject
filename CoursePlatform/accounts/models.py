@@ -8,8 +8,8 @@ from django.contrib.auth.models import Group
 # Create your models here.
 class User(AbstractUser):
     """
-    Right now only users can be only students, added to Students group upon registration.
-    User class uses AbstractUser for flexibility in future
+    Main authentication. User class uses AbstractUser for flexibility in future
+    Users can be either students or partners depending on the option they choose upon registration
     """
     email = models.EmailField(max_length=100, null=False, unique=True)
     is_student = models.BooleanField(null=False, default=False)
@@ -36,7 +36,7 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True,default="M")
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True)
     birth_date = models.DateField(max_length=30, null=True)
     country = CountryField(max_length=50, null=True)
     email_confirmed = models.BooleanField(default=False)

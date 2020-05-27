@@ -12,7 +12,7 @@
             <p>Search among 1000's of courses</p>
 
             <form action="/course" class="search-form d-flex" method="GET">
-              <input type="text" placeholder="What are you planning to learn?" name="key" class="form-control" required>
+              <input type="text" placeholder="Search courses" name="key" class="form-control" required>
               <input type="submit" value="search ">
 
             </form>
@@ -32,10 +32,9 @@
 </div>
 <!-- counter section starts here -->
 <section id="gs-counter" class="text-center py-5">
-  <div class="container md-padding">
-
-    <div class="mt-counter d-flex justify-content-center wow fadeInUp" data-wow-offset="0" data-wow-delay="300ms ">
-      <div class="gs-point ">
+  <div class="container-fluid">
+    <div class="row mt-counter d-flex justify-content-center wow fadeInUp" data-wow-offset="0" data-wow-delay="300ms ">
+      <div class="col gs-point">
         <div class="counter-point">
           <span class="counter">
             {{ partner }}
@@ -43,14 +42,14 @@
         </div>
         <p>All Teachers</p>
       </div>
-      <div class="gs-point ">
+      <div class="col gs-point">
         <div class="counter-point">
           <span class="counter">
             {{ student }} </span>
         </div>
         <p>All Students</p>
       </div>
-      <div class="gs-point ">
+      <div class="col gs-point">
         <div class="counter-point">
           <span class="counter">
             {{ course }}
@@ -58,13 +57,13 @@
         </div>
         <p>Available Courses</p>
       </div>
-      <div class="gs-point ">
+      <div class="col gs-point">
         <div class="counter-point">
           <span class="counter">
             {{ enroll }}
           </span>
         </div>
-        <p>Enrolled Course</p>
+        <p>Enrolled Courses</p>
       </div>
     </div>
   </div>

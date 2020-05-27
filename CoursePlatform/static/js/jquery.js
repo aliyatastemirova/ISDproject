@@ -10045,10 +10045,6 @@ jQuery.expr.filters.animated = function( elem ) {
 	}).length;
 };
 
-
-
-
-
 var docElem = window.document.documentElement;
 
 /**
