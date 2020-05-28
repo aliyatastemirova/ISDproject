@@ -1,3 +1,6 @@
+:root {
+
+--accent-color: #4064AD;}
 body {
     overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
@@ -414,10 +417,7 @@ footer {
     text-align: center;
 }
 
-nav.navbar.navbar-expand-lg.navbar-light {
-    margin-right: auto;
-    margin-left: 60px;
-}
+
 
 .hdr-login a {
     color: #333;
@@ -441,6 +441,18 @@ ul#menu-primary li a {
     margin-right: 40px;
     color: #777;
     font-weight: 600;
+}
+
+li.menu-primary a {
+    font-size: 16px;
+    margin-right: 40px;
+    color: #777;
+    font-weight: 600;
+
+}
+
+li.menu-primary a:hover {
+    color: #4064AD;
 }
 
 ul#menu-primary li a:hover {
@@ -541,7 +553,7 @@ span.counter {
 }
 
 .gs-point {
-    padding: 0 20px;
+    padding: 0px;
     width: 20%;
 }
 
@@ -689,10 +701,17 @@ select {
     border: none;
 }
 
+ul.select-options {
+    height: 200px;
+    width: 100%;
+    overflow-y: auto;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
 .select-styled:after {
-    content: "\f078";
     position: absolute;
-    font-family: 'Font Awesome 5 Pro';
+    font-family: "Font Awesome 5 Free"; font-weight: 600; content: "\f078";
     top: 0px;
     font-size: 14px;
     opacity: 0.6;
@@ -1034,12 +1053,12 @@ ul.accordion-lists li p {
 }
 
 .wrap-login {
-    width: 390px;
+    width: 100%;
     background: #fff;
     margin: 60px auto;
     border-radius: 10px;
     overflow: hidden;
-    padding: 55px 55px 33px 55px;
+    padding: 55px 10px 33px 10px;
     box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -1214,9 +1233,35 @@ section.site-section.profile-editor {
 h1 span {
     color: #4064AD;
 }
+/****
+Profile
+****/
+
+/* Border box for profile information */
+.mt-profile-box {
+
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    transition-duration: 0.2s;
+
+
+}
+.mt-profile-box:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+.mt-profile-box i, .mt-profile-box .h6 {
+transition-duration: 0.2s;
+color: #636363;
+}
+.mt-profile-box:hover i, .mt-profile-box:hover .h6 {
+color: #ededed;
+}
+
+
 
 .mt-step input {
-    width: 380px;
+    width: 100%;
     background: #eee;
     border: none;
     height: 50px;
@@ -1361,3 +1406,16 @@ span.mt-time {
     color: #fff;
 }
 
+/* Hide the default select field */
+.select-hidden {
+    display: none;
+}
+
+/* Course content sidebar */
+.c-course-content {
+color: white;
+    background: #4064AD;
+    box-shadow: 0 30px 60px 0 rgba(31, 36, 48, 0.2);
+}
+
+}
