@@ -141,5 +141,9 @@ class AccountDashboardView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        context = {'user': user}
+        purchased_course = Course.objects.filter(enroll__user=request.user)
+        context = {
+            'user': user,
+            'purchased_course': purchased_course
+        }
         return render(request, self.template_name, context)

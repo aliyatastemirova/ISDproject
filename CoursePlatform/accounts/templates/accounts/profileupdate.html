@@ -93,28 +93,31 @@
                                                      alt="Profile picture" width="150"
                                                      height="200">
                                             </div>
+                                            <div class="container">
                                             {% for field in user_form %}
                                             {{ field.errors }}
-                                            <div class="container">
                                                 <div class="row">
                                                     <div class="col-sm-2 col-md-8 my-2">
                                                         <label>{{ field.label }}</label>
                                                         {{ field }}
                                                     </div>
                                                 </div>
-                                            </div>
+
                                             {% endfor %}
+                                            </div>
+                                            <div class="container">
                                             {% for field in profile_form %}
                                             {{ field.errors }}
-                                            <div class="container">
+
                                                 <div class="row">
                                                     <div class="col-md-8 my-2">
                                                         <label>{{ field.label }}</label>
                                                         {{ field }}
                                                     </div>
                                                 </div>
-                                            </div>
+
                                             {% endfor %}
+                                            </div>
                                             <br>
                                             <div class="form-group" style="margin-left: 15px;">
                                                 <button class="mt-btn" type="submit">Save</button>
@@ -125,7 +128,7 @@
                                 </div>
                                 <div class="tab-pane text-style" id="tab2">
                                     <div class="mt-profile-form">
-                                        <h4 class="mt-title">My Purchased Course</h4>
+                                        <h4 class="mt-title">My Purchased Courses</h4>
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>

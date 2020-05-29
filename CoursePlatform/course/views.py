@@ -72,7 +72,7 @@ class CoursePlay(View):
             messages.success(request, f"Please Enroll First")
             return redirect('/course/' + slug)
 
-        content = CourseContent.objects.filter(course=course.id)
+        content = CourseContent.objects.filter(course=course.id).order_by("sort_order")
 
         context = {
             'content': content,
