@@ -1,5 +1,11 @@
 # Changelog
 
+### 2020-05-29
+#### Final UI adjustements and documentation update
+- Made the website responsive
+- Updated documentation
+- Adjusted some code formatting
+
 ### 2020-05-14
 #### [#58mpt5](https://app.clickup.com/t/#58mpt5) - Add partner registration
 - Added Partners group, is_student and is_partner boolean fields in User model

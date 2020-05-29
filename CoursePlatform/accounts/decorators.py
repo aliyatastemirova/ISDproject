@@ -10,6 +10,7 @@ def unauthenticated(view_function):
     :param view_function: the function that uses this decorator in views.py
     :return: if authenticated: account page, else calls the view function
     """
+
     def wrapper_function(request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('account')

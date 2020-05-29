@@ -5,59 +5,55 @@
 
 <div class="inner-banner text-center">
     <div class="container">
-      <div class="row justify-content-center ">
-        <div class="col-md-12">
-          <h1>Register</h1>
-          <div class="col-md-5 col-sm-8 wrap-login">
-                <form class="login-form" method="post" autocomplete="off">
+        <div class="row justify-content-center ">
+            <div class="col-md-12">
+                <h1>Register</h1>
+                <div class="col-md-5 col-sm-8 wrap-login">
+                    <form class="login-form" method="post" autocomplete="off">
                     <span class="login-title">
                         Welcome to eTrain
                       </span>
-                    {% csrf_token %}
-                    {% if form.errors %}
-                    {% for field in form %}
-                    {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
+                        {% csrf_token %}
+                        {% if form.errors %}
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
 
-                    {% for field in form %}
-                    {{ field.errors }}
+                        {% for field in form %}
+                        {{ field.errors }}
 
+                        <div class="wrap-input100 validate-input">
+                            {{ field }}
+                        </div>
 
-                    <div class="wrap-input100 validate-input">
-                        {{ field }}
-                    </div>
+                        {% endfor %}
 
-                    {% endfor %}
-
-
-                    <button class="mt-btn">
-                        Login
-                      </button>
-                  <div class="text-center p-t-115">
+                        <button class="mt-btn">
+                            Login
+                        </button>
+                        <div class="text-center p-t-115">
                     <span class="txt1">
                       Don’t have an account?
                     </span>
-                    <a class="txt2" href="/register">
-                      Sign Up
-                    </a>
-                  </div>
-                </form>
+                            <a class="txt2" href="/register">
+                                Sign Up
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-  
-  
-      </div>
     </div>
-  </div>
-  </div>
+</div>
+</div>
 {% endblock %}

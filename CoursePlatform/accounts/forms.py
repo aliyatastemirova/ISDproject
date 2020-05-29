@@ -27,6 +27,7 @@ class UserUpdateForm(forms.ModelForm):
     """
     A form for updating common fields for all types of users: email, username
     """
+
     class Meta:
         model = User
         fields = ["username", "email"]

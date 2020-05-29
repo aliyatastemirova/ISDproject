@@ -15,7 +15,7 @@ class GroupAdminForm(forms.ModelForm):
         User.objects.all(),
         widget=admin.widgets.FilteredSelectMultiple('Users', False),
         required=False,
-        )
+    )
 
     def __init__(self, *args, **kwargs):
         super(GroupAdminForm, self).__init__(*args, **kwargs)

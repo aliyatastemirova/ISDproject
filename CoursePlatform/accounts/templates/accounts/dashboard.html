@@ -9,8 +9,6 @@
             <div class="col-md-12">
                 <h1>Welcome <span class="user-name">{{ user.username }}</span></h1>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -25,7 +23,8 @@
                         <div class="col-md-3">
                             <nav class="nav-sidebar">
                                 <ul class="nav tabs">
-                                    <li class="active col-sm-6 col-md-12"><a class="active" href="#tab1" data-toggle="tab">
+                                    <li class="active col-sm-6 col-md-12"><a class="active" href="#tab1"
+                                                                             data-toggle="tab">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                                              id="Capa_1" width="32px" fill="#666" x="0px" y="0px"
@@ -87,10 +86,11 @@
                                 <div class="tab-pane active text-style" id="tab1">
                                     <h4 class="mt-title">Personal Details</h4>
                                     <div class="col-md-12 col-sm-4 d-flex flex-column align-items-center justify-content-center ">
-                                                <img class="img-fluid rounded-circle border border-grey " src="{{ user.profile.profile_pic.url }}"
-                                                     alt="Profile picture" width="150"
-                                                     height="200">
-                                            </div>
+                                        <img class="img-fluid rounded-circle border border-grey "
+                                             src="{{ user.profile.profile_pic.url }}"
+                                             alt="Profile picture" width="150"
+                                             height="200">
+                                    </div>
                                     <br>
                                     <!-- Container of profile information -->
                                     <div class="mt-profile-box my-2">

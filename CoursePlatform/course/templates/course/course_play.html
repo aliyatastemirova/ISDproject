@@ -3,18 +3,21 @@
 {% load crispy_forms_tags %}
 {% load embed_video_tags %}
 {% block content %}
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+<style>
+    .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+</style>
 <div class="inner-banner text-center">
     <div class="container">
-      <div class="row justify-content-center ">
-        <div class="col-md-12">
-          <h1>{{ course.name | title}}</h1>
+        <div class="row justify-content-center ">
+            <div class="col-md-12">
+                <h1>{{ course.name | title}}</h1>
+            </div>
+
+
         </div>
-
-
-      </div>
     </div>
-  </div>
+</div>
 </div>
 
 <section class="site-section inner-section py-0">
@@ -46,49 +49,36 @@
             <div class="col-md-4 c-course-content py-3">
                 <!-- Content of the course (videos) -->
                 <h4 class="lead font-weight-bold">Course Content</h4>
-
-
-                    {% for data in content %}
-                    <div class="row no-gutters">
-                        <div class="col-md-5 d-flex justify-content-start align-items-center">
-                            <a href="/course/{{ course.slug }}/play?play={{ data.id}}">
+                {% for data in content %}
+                <div class="row no-gutters">
+                    <div class="col-md-5 d-flex justify-content-start align-items-center">
+                        <a href="/course/{{ course.slug }}/play?play={{ data.id}}">
                             {% video data.video_url '100x70' %}
-                            </a></div>
-                        <div class="col-md-5 pl-md-4 pl-lg-1">{{ data.name }}</div>
-                    </div>
-
-                    {% endfor %}
-
-
-
+                        </a></div>
+                    <div class="col-md-5 pl-md-4 pl-lg-1">{{ data.name }}</div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 
     <div class="container">
-      <div class="row">
-        <div class="col-md-10">
-          <div class="course-video-descriptions">
-            <h2>{{ course.name | title}}</h2>
-
-
-              {% for tags in tag%}
-
-              <span class="badge badge-primary">{{ tags.name|title }}</span>
-
-                
-
-              {% endfor %}
-
-              <br><br>
-            
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, iusto. Iure, ducimus. Nobis earum adipisci
-              aut, modi ratione iure quo tenetur ullam maxime, voluptate eligendi iste veniam. Facere, fuga unde.</p>
-           
-          </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="course-video-descriptions">
+                    <h2>{{ course.name | title}}</h2>
+                    {% for tags in tag%}
+                    <span class="badge badge-primary">{{ tags.name|title }}</span>
+                    {% endfor %}
+                    <br><br>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, iusto. Iure, ducimus. Nobis earum
+                        adipisci
+                        aut, modi ratione iure quo tenetur ullam maxime, voluptate eligendi iste veniam. Facere, fuga
+                        unde.</p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
 {% endblock %}

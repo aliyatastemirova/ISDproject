@@ -5,7 +5,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .decorators import unauthenticated
 
-
 urlpatterns = [
     path("", user_views.HomeView.as_view(), name="home"),
     path("register/", user_views.RegistrationFormView.as_view(), name="register"),

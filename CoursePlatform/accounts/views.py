@@ -7,11 +7,10 @@ from .forms import FullUserCreationForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.models import Group,User
+from django.contrib.auth.models import Group, User
 from .decorators import unauthenticated
 from .models import User
 from course.models import Course, CourseContent, Enroll
-from django.http import HttpResponse
 
 
 class HomeView(View):
@@ -20,8 +19,8 @@ class HomeView(View):
     get() retrieves existing objects in our database for the automatic counter of students, partners, courses, enrolled
     """
     template_name = "accounts/homepage.html"
-    def get(self, request, *args, **kwargs):
 
+    def get(self, request, *args, **kwargs):
         queryset = Course.objects.all()
         partner = User.objects.filter(is_partner=True).count()
         student = User.objects.filter(is_student=True).count()
@@ -44,7 +43,7 @@ class RegistrationFormView(View):
     Necessary fields: username, email, password, repeat password
     """
     form_class = FullUserCreationForm
-    template_name = "accounts/register.html"    
+    template_name = "accounts/register.html"
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
