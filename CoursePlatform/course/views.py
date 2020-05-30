@@ -11,6 +11,9 @@ from django.core.mail import send_mail
 
 # Create your views here.
 class CourseList(ListView):
+    """
+        Shows all the availabe course
+    """
     template_name = "course/course_list.html"
 
     def get(self, request, *args, **kwargs):
@@ -26,6 +29,9 @@ class CourseList(ListView):
 
 
 class CourseDetailView(View):
+    """
+        Shows detail of each course
+    """
     template_name = "course/course_detail.html"
 
     def get(self, request, slug):
@@ -41,6 +47,9 @@ class CourseDetailView(View):
 
 @method_decorator(login_required, name='dispatch')
 class EnrollStudent(View):
+    """
+        Is used to enroll student
+    """
     def get(self, request, slug):
         course = Course.objects.get(slug=slug)
         has_enrolled = Enroll.objects.filter(course=course, user=request.user).exists()
@@ -56,6 +65,9 @@ class EnrollStudent(View):
 
 @method_decorator(login_required, name='dispatch')
 class CoursePlay(View):
+    """
+       Is used to play the course
+    """
     template_name = "course/course_play.html"
 
     def get(self, request, slug):

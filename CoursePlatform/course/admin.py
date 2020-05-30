@@ -5,27 +5,42 @@ from django_summernote.admin import SummernoteModelAdmin
 
 
 # Register your models here.
-# It is the definition of the subcategory field shown in category forms
+
 class SubCategoryInline(admin.TabularInline):
+    """
+       It is the definition of the subcategory field shown in category forms
+    """
     fields = ['name', 'slug']
     model = SubCategory
     extra = 2
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    # It will display the id,name and created in list view of this specific model
+    """
+       It will display the id,name and created in list view of this specific model
+    """
+   
     list_display = ('id', 'name', 'created')
 
-    # It will create the link on that specified columns
+    """
+       It will create the link on that specified columns
+    """
+   
     list_display_links = ('id', 'name', 'created')
 
-    # It will show the fields listed on 'fields' column on the backend form
+    """
+      It will show the fields listed on 'fields' column on the backend form
+    """
+   
     fieldsets = [
         ('Category', {'fields': ['name', 'slug']}),
 
     ]
 
-    # It will show subcategory option in Category creation and edit form
+    """
+      It will show subcategory option in Category creation and edit form
+    """
+    
     inlines = [SubCategoryInline]
 
 
