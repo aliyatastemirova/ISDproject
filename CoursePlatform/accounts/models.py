@@ -1,21 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
-from django.db.models.signals import post_save
 from django_countries.fields import CountryField
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group
 
 
 # Create your models here.
-class Student(AbstractUser):
+class User(AbstractUser):
     """
-    Right now only users can be only students.
-    Student class uses AbstractUser for flexibility in future
+    Main authentication. User class uses AbstractUser for flexibility in future
+    Users can be either students or partners depending on the option they choose upon registration
     """
     email = models.EmailField(max_length=100, null=False, unique=True)
+    is_student = models.BooleanField(null=False, default=False)
+    is_partner = models.BooleanField(null=False, default=False)
 
     class Meta:
-        verbose_name_plural = "Students"
+        verbose_name_plural = "Users"
 
     def __str__(self):
         return self.username
@@ -23,7 +24,7 @@ class Student(AbstractUser):
 
 class Profile(models.Model):
     """
-    Profile is created automatically when a Student user is created
+    Profile is created automatically when a user is created
     It's necessary to collect more information than what is gathered during registration
     """
     GENDER_CHOICES = (
@@ -48,3 +49,5 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
+students, created = Group.objects.get_or_create(name='Students')
+partners, created = Group.objects.get_or_create(name='Partners')

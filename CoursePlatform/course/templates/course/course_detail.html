@@ -1,0 +1,90 @@
+{% extends 'base_frontend.html'  %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load embed_video_tags %}
+{% block content %}
+
+
+<div class="inner-banner text-center">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-md-12">
+                <h1>{{ course.name | title }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<section class="site-section inner-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row intro-video">
+                    <div class="col-md-8">
+                        <a href="/course/{{ course.slug }}/play">
+                            <div id="mt-video">
+                                <img class="card-img-top img-fluid" src="{{ course.thumbnail.url }}">
+                                <div class="icon"><i class="far fa-play-circle"></i></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="short-details">
+                            <h4>{{ course.name }}</h4>
+                            <ul class="entry-meta">
+                                <li><span>Total Episodes: </span>{{ course.no_of_content}}</li>
+                                <li><span>Category: </span>{{ course.category}}
+                                <li><span>Author: </span>{{ course.created_by | title }}
+                                </li>
+                            </ul>
+                            <p class="mt-label">${{ course.price}}</p>
+                            <div class="mt-anchor">
+                                {% if enrolled == 0 %}
+                                <a href="/enroll/{{ course.slug }}" class="mt-btn">
+                                    Enroll Now
+                                </a>
+                                {% else %}
+                                <a href="/course/{{ course.slug }}/play" class="mt-btn">
+                                    Play Now
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-descriptions">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                               role="tab"
+                               aria-controls="nav-home" aria-selected="true">Course Overview</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                               role="tab"
+                               aria-controls="nav-profile" aria-selected="false">Prerequisites</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+                               role="tab"
+                               aria-controls="nav-contact" aria-selected="false">Targeted Students</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                             aria-labelledby="nav-home-tab">
+                            {{ course.description | safe }}
+                        </div>
+                        <div class="tab-pane " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            {{ course.prerequisite | safe }}
+                        </div>
+                        <div class="tab-pane" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            {{ course.who_this_course_is_for | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

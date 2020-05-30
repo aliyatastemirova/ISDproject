@@ -1,5 +1,26 @@
 # Changelog
 
+### 2020-05-29
+#### Final UI adjustements and documentation update
+- Made the website responsive
+- Updated documentation
+- Adjusted some code formatting
+
+### 2020-05-14
+#### [#58mpt5](https://app.clickup.com/t/#58mpt5) - Add partner registration
+- Added Partners group, is_student and is_partner boolean fields in User model
+- Added a custom filter for Users in Django admin panel to filter by students or by partners
+- Added a better view for User and Profile models on Django admin panel
+- Added a possibility to view all Users that belong to a Group, easily remove or add users from the group
+
+### 2020-05-09
+#### [#54nb2t](https://app.clickup.com/t/54nb2t) - Create a user dashboard
+- Added user dashboard view
+- Added decorators to handle authenticated users
+#### [#6rb527](https://app.clickup.com/t/6rb527) - Make auth user and Student user separate
+- Changed user auth model, which required database changes
+- Added Student user group, which can be later have specific permissions
+
 ### 2020-04-26
 #### [#689cmp](https://app.clickup.com/t/689cmp) - Add profile picture upload feature for students
 - Created a field for a profile picture in Profile model

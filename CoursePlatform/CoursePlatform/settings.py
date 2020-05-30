@@ -1,6 +1,6 @@
-
 import os
 import environ
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -23,16 +23,15 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
-   
+
 ]
 
 # Application definition
 
 INSTALLED_APPS = [
-
-       # General use templates & template tags (should appear first)
+    # General use templates & template tags (should appear first)
     'adminlte3',
-     # Optional: Django admin theme (must be before django.contrib.admin)
+    # Optional: Django admin theme (must be before django.contrib.admin)
     'adminlte3_theme',
     'accounts.apps.AccountsConfig',
     'crispy_forms',
@@ -44,12 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'course',
-    'embed_video'
+    'embed_video',
+    'django_summernote'
 ]
 
 # Custom user authentication
 
-AUTH_USER_MODEL = 'accounts.Student'
+AUTH_USER_MODEL = 'accounts.User'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +68,7 @@ ROOT_URLCONF = 'CoursePlatform.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,22 +83,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'CoursePlatform.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-         'HOST':  env('DB_HOST'),
+        'HOST': env('DB_HOST'),
         'PORT': env('DB_PORT'),
-        'NAME':  env('DB_DATABASE'),
+        'NAME': env('DB_DATABASE'),
         'USER': env('DB_USERNAME'),
         'PASSWORD': env('DB_PASSWORD'),
-       
+
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -116,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -130,7 +129,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -138,7 +136,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

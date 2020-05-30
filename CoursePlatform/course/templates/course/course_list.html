@@ -1,0 +1,50 @@
+{% extends 'base_frontend.html'  %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="inner-banner text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h1>Courses List</h1>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<section class="site-section inner-section">
+    <div class="container">
+        <div class="row course-row">
+            {% for course in object_list %}
+            <div class="col-md-6">
+                <div class="mt-course">
+                    <figure>
+                        <a href="{{ course.slug }}" class="course-image"
+                           style="background:url(  {{ course.thumbnail.url }})"></a>
+                    </figure>
+                    <div class="descriptions">
+                        <h4 class="course-title"><a href="{{ course.slug }}">{{ course.name}}
+                        </a>
+                        </h4>
+                        <ul class="entry-meta">
+                            <li><span>Total Episodes: </span>{{ course.no_of_content}}</li>
+                            <li><span>Category: </span>{{ course.category}}</li>
+                            <li><span>Author: </span>{{ course.created_by |title }}</li>
+                        </ul>
+                        <p class="mt-label">${{ course.price}}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% empty %}
+            <h2>No course Found</h2>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
