@@ -67,8 +67,7 @@
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item badge hdr-login text-right text-lg-center py-3 py-lg-0 px-4 px-lg-0 mr-3 mr-lg-2">
                             {% if user.is_authenticated %}
-                            <a title="Profile" href="/profile/"><i class="far fa-user"></i> {{
-                                request.user.username|title }}</a>
+                            <a title="Profile" href="/profile/"><i class="far fa-user"></i> {{request.user.username|title}}</a>
                             {% else %}
                             <a href="/login/"><i class="far fa-user"></i>Login</a>
                             {% endif %}
@@ -79,47 +78,11 @@
                             {% endif %}
                         </li>
                     </ul>
-
                 </div>
+            </nav>
         </div>
-        </nav>
     </header>
 
-    <!--    <header class="main-header">-->
-    <!--        <div class="container">-->
-    <!--            <div class="header-flex">-->
-    <!--                <div class="top-logo">-->
-    <!--                    <a href="/"><img src="{% static '/images/logo.png' %}" alt=""></a>-->
-    <!--                </div>-->
-    <!--                <nav class="navbar navbar-expand-lg navbar-light " role="navigation">-->
-    <!--                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"-->
-    <!--                            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
-    <!--                        <span class="navbar-toggler-icon"></span>-->
-    <!--                    </button>-->
-    <!--                    <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
-    <!--                        <ul class="navbar-nav ml-auto">-->
-    <!--                            <li class="badge hdr-login order-lg-3 my-2">-->
-    <!--                                {% if user.is_authenticated %}-->
-    <!--                                <a href="/profile/"><i class="far fa-user"></i> {{ request.user.username|title }}</a>-->
-    <!--                                {% else %}-->
-    <!--                                <a href="/login/"><i class="far fa-user"></i>Login</a>-->
-    <!--                                {% endif %}-->
-    <!--                            </li>-->
-    <!--                            <li class="nav-item menu-primary"><a href="/">Home</a></li>-->
-    <!--                            &lt;!&ndash; <li><a href="#">About Us</a></li> &ndash;&gt;-->
-    <!--                            <li class=" nav-item menu-primary"><a href="/course">Courses</a></li>-->
-    <!--                            &lt;!&ndash; <li><a href="/contact">Contact Us</a></li> &ndash;&gt;-->
-    <!--                            <li class=" nav-item badge hdr-login order-lg-4 my-2 my-lg-0">-->
-    <!--                                {% if user.is_authenticated %}-->
-    <!--                                <a href="/logout/"><i class="fas fa-sign-out-alt"></i></a>-->
-    <!--                                {% endif %}-->
-    <!--                            </li>-->
-    <!--                        </ul>-->
-    <!--                    </div>-->
-    <!--                </nav>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </header>-->
 
     {% block content %}
 
@@ -206,6 +169,8 @@
         $("#id_birth_date").datepicker({maxDate: "-1D"});
     });
 
+
+
     </script>
     <script>
 
@@ -216,6 +181,8 @@
       $('#id_password2').attr('placeholder', 'Confirm Password');
 
       $('#id_username').attr('placeholder', 'Username');
+
+
 
     </script>
 
@@ -242,6 +209,8 @@
 
 
 
+
+
     </script>
     {% elif message.tags == 'error'%}
 
@@ -255,6 +224,8 @@
                    loaderBg: '#4064AD',  // To change the background
                    position:'top-right'
                })
+
+
 
 
 

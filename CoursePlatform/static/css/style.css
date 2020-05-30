@@ -1264,8 +1264,9 @@ color: #ededed;
     width: 100%;
     background: #eee;
     border: none;
-    height: 50px;
-    padding: 0 15px;
+    padding: 10px 5px 10px 5px;
+    border-radius: 4px;
+    min-height: 50px;
     max-width: 100%;
 }
 
