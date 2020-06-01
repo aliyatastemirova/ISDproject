@@ -56,9 +56,11 @@ class RegistrationFormView(View):
             user_type = request.POST.get('user_type')
             if user_type == "1":
                 User.objects.filter(pk=user.pk).update(is_student=True)
+                students, created = Group.objects.get_or_create(name='Students')
                 group = Group.objects.get(name='Students')
             elif user_type == "2":
                 User.objects.filter(pk=user.pk).update(is_partner=True, is_staff=True)
+                partners, created = Group.objects.get_or_create(name='Partners')
                 group = Group.objects.get(name='Partners')
             user.groups.add(group)
             messages.success(request, f"Your account has been successfully created")
