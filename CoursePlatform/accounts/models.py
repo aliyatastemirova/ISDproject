@@ -48,6 +48,3 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
-
-students, created = Group.objects.get_or_create(name='Students')
-partners, created = Group.objects.get_or_create(name='Partners')
