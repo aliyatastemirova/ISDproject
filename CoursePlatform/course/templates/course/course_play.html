@@ -71,10 +71,9 @@
                     <span class="badge badge-primary">{{ tags.name|title }}</span>
                     {% endfor %}
                     <br><br>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, iusto. Iure, ducimus. Nobis earum
-                        adipisci
-                        aut, modi ratione iure quo tenetur ullam maxime, voluptate eligendi iste veniam. Facere, fuga
-                        unde.</p>
+                    <p>
+                        {{ course.description | safe }}
+                    </p>
                 </div>
             </div>
         </div>
