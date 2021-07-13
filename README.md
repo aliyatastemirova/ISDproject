@@ -12,8 +12,8 @@
 ## Documentation
 ### Environment setup
 Setting up the environment with requirements.txt:
-- run "pip install -r requirements.txt" or "pip install --user --requirement requirements.txt"
-- If you want to update requirements file, add necessary packages and run "pip freeze > requirements.txt"
+- run `pip install -r requirements.txt" or "pip install --user --requirement requirements.txt`
+- If you want to update requirements file, add necessary packages and run `pip freeze > requirements.txt`
 
 Setting up environment variables for the database:
 - check .env.example file in CoursePlatform/Courseplatform folder to see what you need to have in your .env file
@@ -22,10 +22,10 @@ Setting up environment variables for the database:
 - it's also possible to substitute postgres settings and use the default sqlite database by adjusting settings
 
 Run usual django commands (manage.py file is in main CoursePlatform directory):
-- python manage.py makemigrations
-- python manage.py migrate
-- python manage.py migrate --run-syncdb
-- python manage.py runserver
+- `python manage.py makemigrations`
+- `python manage.py migrate`
+- `python manage.py migrate --run-syncdb`
+- `python manage.py runserver`
 
 ### About the website
 This is an online course platform that allows users to publish/watch courses depending on their access.
